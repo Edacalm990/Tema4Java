@@ -85,12 +85,13 @@ public class Morra {
                 numAdivinaMaquina = numRandom(numMaquina, (DEDOS_MAX * 2));
                 // se calcula el ganador de la ronda 
                 ganadorRonda = ganadorRonda(numJugador, numMaquina, numAdivina, numAdivinaMaquina);
-                // se comprueba si alguno ha llegado a la puntación mínima o máxima
+                // se añade la pubtacion de ronda
                 if (ganadorRonda.equalsIgnoreCase("persona")) {
                     puntuacionJugador += 1;
-                } else if (ganadorRonda.equalsIgnoreCase("persona")) {
+                } else if (ganadorRonda.equalsIgnoreCase("maquina")) {
                     puntuacionMaquina += 1;
                 }
+                // se comprueba si alguno ha llegado a la puntación mínima o máxima
                 jaque = quienJaque(puntuacionJugador, puntuacionMaquina, PUNTUACION_FINAL_MIN, PUNTUACION_FINAL_MAX);
                 // se calcula el ganador final si lo hay
                 ganadorFinal = quienGana(jaque, puntuacionMaquina, puntuacionJugador, PUNTUACION_FINAL_MAX);

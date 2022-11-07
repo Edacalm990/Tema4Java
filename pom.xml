@@ -15,7 +15,6 @@
         </dependency>
  </dependencies>
     
-    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
