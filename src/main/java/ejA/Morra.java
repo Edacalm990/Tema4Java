@@ -63,10 +63,12 @@ public class Morra {
                 numJugador, numAdivina, numMaquina, numAdivinaMaquina);
 
         do {
-            //solo si es la primera ronda se pregunta si se quiere jugar
+            // se pregunta si se quiere jugar todas las veces 
             jugar = mensajeConfirmacion(peticionJugar);
 
+            // solo si quieres jugar 
             if (jugar == JOptionPane.YES_OPTION) {
+                // solo en la primera ronda
                 if (ronda == 0) {
                     // se muestra el mensaje de las reglas
                     mostrarMensaje(reglasJuego);
@@ -82,7 +84,7 @@ public class Morra {
                 // frase para dar ambiente
                 mostrarMensaje(TEXTO_PENSAR);
                 // se obtiene un número random que como mínimo tendrá el número que ha sacado la maquina
-                numAdivinaMaquina = numRandom(numMaquina, (DEDOS_MAX * 2));
+                numAdivinaMaquina = numRandom((numMaquina+1), (DEDOS_MAX * 2));
                 // se calcula el ganador de la ronda 
                 ganadorRonda = ganadorRonda(numJugador, numMaquina, numAdivina, numAdivinaMaquina);
                 // se añade la pubtacion de ronda
@@ -117,20 +119,23 @@ public class Morra {
         } while (jugar != JOptionPane.NO_OPTION);
 
     }
-
+    // calcula un numero Random entre enteros
     private static int numRandom(int inicio, int fin) {
         fin += 1;
         return random.nextInt(inicio, fin);
     }
-
+    // muestra un mensaje
     private static void mostrarMensaje(String text) {
         JOptionPane.showMessageDialog(null, text);
     }
-
+    // muestra una confirmacion
     private static int mensajeConfirmacion(String text) {
         return JOptionPane.showConfirmDialog(null, text);
     }
-
+    // solicita un numero entre un rango, 
+    //text=texto que se desea usar para pedir el numero
+    //min= numero minimo de rango
+    //max= numero maximo de rango
     private static int solicitarNumero(String text, int min, int max) {
         int respuesta = -1;
 
@@ -155,14 +160,16 @@ public class Morra {
         } while (!estaEnRango(respuesta, min, max));
         return respuesta;
     }
-
+    
+    // se comprueba si un numero esta en rango
     private static boolean estaEnRango(int num, int min, int max) {
         return (num >= min && num <= max);
     }
 
+    // se comprubea si alguien ha ganado
     private static String quienGana(String jaque, int puntuacionMaquina, int puntacionHumano, int PUNTUACION_FINAL_MAX) {
         String ganadorFinal = "";
-        if (!(jaque.equalsIgnoreCase("ninguno"))
+        if (!(jaque.equalsIgnoreCase("nadie"))
                 && ((puntacionHumano >= (puntuacionMaquina + 2) || (puntuacionMaquina >= (puntacionHumano + 2))))) {
             ganadorFinal = jaque;
         } else if (puntuacionMaquina == PUNTUACION_FINAL_MAX || puntacionHumano == PUNTUACION_FINAL_MAX) {
@@ -173,7 +180,8 @@ public class Morra {
 
         return ganadorFinal;
     }
-
+    
+    // se determina el ganador de la ronda
     private static String ganadorRonda(int numJugador, int numMaquina, int numAdivina, int numAdivinaMaquina) {
         String ganador = "";
         if (numAdivina == (numJugador + numMaquina)) {
@@ -185,7 +193,8 @@ public class Morra {
         }
         return ganador;
     }
-
+    
+    // se determina si alguno ha llegado a 5 puntos o 21 
     private static String quienJaque(int puntuacionHumano, int puntiacionMaquina, int PUNTUACION_FINAL_MIN, int PUNTUACION_FINAL_MAX) {
         String jaque = "";
         if (puntuacionHumano == PUNTUACION_FINAL_MIN || puntuacionHumano == PUNTUACION_FINAL_MAX) {
@@ -197,7 +206,8 @@ public class Morra {
         }
         return jaque;
     }
-
+    
+    // mensaje final de partida
     private static String mensajeFinal(String ganadorFinal, String nombreHumano) {
         String mensajeGanador = switch (ganadorFinal) {
             case "persona" ->
@@ -215,7 +225,7 @@ public class Morra {
         return mensajeGanador;
 
     }
-
+    // se solicita el nombre
     private static String solicitarPalabra(String text) {
         String mensaje = (text.isBlank()) ? "Dame una palabra" : text;
         return JOptionPane.showInputDialog(mensaje);
