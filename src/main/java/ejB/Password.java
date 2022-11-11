@@ -20,40 +20,52 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class Password {
 
     public static void main(String[] args) {
+        // se declara e instancia 
         final char[] LISTACARACTERES = {'a', 'e', 'i', 'o', 'u', '!', '@', '#', '~', '½'};
         final String[] OPCIONES = {"pin", "password", "secuencia"};
         String opcion=null;
-        // pedimos la opcion
+        
+        
         do {
+            // pedimos la opcion
             opcion = menuOpciones(OPCIONES);
+            // si la opcion no es cancelar
             if (opcion != null) {
                 String respuesta = switch (opcion) {
                     case "pin" ->
+                        // genera números pin aleatorios de 4 digitos
                         pinMovil();
                     case "password" ->
+                        // genera contraseñas para usuarios de un sistema operativo con 8 caracteres, incluyendo números y letras;
                         passwordSeguro();
                     case "secuencia" ->
+                        // genera una secuencia de "n" caracteres aleatorios del conjunto LISTACARACTERES
                         secuencia(pedirNumeroIntEntreRangos(1, 50), LISTACARACTERES);
                     default ->
                         "Error";
                 };
+                // se muestra el resultado
                 JOptionPane.showMessageDialog(null, """
                                                 %s -> %s
                                                 """.formatted(opcion, respuesta));
             }
+            // se vuelve a ejectutar hasta que el usuario ponga cancelar
         } while (opcion != null);
 
     }
 
     private static String pinMovil() {
+        // String random de 4 digitos
         return RandomStringUtils.randomNumeric(4);
     }
-
+       
     private static String passwordSeguro() {
+        // String random alphanumerico de 8 digitos
         return RandomStringUtils.randomAlphanumeric(8);
     }
 
     private static String secuencia(int n, char[] elementos) {
+        // una secuencia de "n" caracteres aleatorios del conjunto LISTACARACTERES
         return RandomStringUtils.random(n, elementos);
     }
 
@@ -61,7 +73,9 @@ public class Password {
         int numero = 0;
         do {
             try {
-                numero = Integer.parseInt(JOptionPane.showInputDialog("Cuantos caracteres quieres que tenga tu secuencia?"));
+                // se solicita el numero de caracteres
+                numero = Integer.parseInt(JOptionPane.showInputDialog(
+                        "Cuantos caracteres quieres que tenga tu secuencia?"));
 
             } catch (NumberFormatException e) {
                 JOptionPane.showConfirmDialog(null, """
@@ -70,6 +84,7 @@ public class Password {
             } catch (Exception e) {
                 JOptionPane.showConfirmDialog(null, e);
             }
+            // se repite mientras no esté en el rango
         } while (!(numero >= min && numero <= max));
         return numero;
     }
@@ -81,10 +96,12 @@ public class Password {
                                        Escriba "%s" si desea generar un pin aleatorio
                                        Escriba "%s" si desea generar un password 
                                        Escirba "%s" si desea una secuencia
-                                       """.formatted(opciones[0], opciones[1], opciones[2]));
+                                       """.formatted(opciones[0], opciones[1], opciones[2])).toLowerCase();
+            // si la opcion elegida  no esta en las opciones disponibles y no es cancelar
             if (!Arrays.asList(opciones).contains(opcion) && opcion != null) {
                 JOptionPane.showMessageDialog(null, "El opcion no es correcta");
             };
+            // se vuleve a solicitar si no esta en las opciones disponibles o no es cancelar
         } while (!(Arrays.asList(opciones).contains(opcion)) && opcion != null);
 
         return opcion;
