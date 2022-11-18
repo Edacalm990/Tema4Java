@@ -15,13 +15,17 @@ public class MisVehiculos {
         // Instancia de la clase Scanner, llamada teclado
         Scanner teclado = new Scanner(System.in);
         
-        Vehiculos ferrari=new Vehiculos("8778fghb", "872626376", "ferrari", "murcielago", "rojo", 200, true);
+        Vehiculo ferrari=new Vehiculo("8778fghb", "872626376", "ferrari", "murcielago", "rojo", 200, true);
         
         System.out.println(ferrari.toString());
         
         ferrari.setColor("verde");
         
         System.out.println(ferrari.toString());
+        
+        Vehiculo copiaFerrar = new Vehiculo(ferrari);
+        Vehiculo nuevo= ferrari.copiar();
+        Vehiculo nuevo2= Vehiculo.copiar(ferrari);
         
     }
 }
