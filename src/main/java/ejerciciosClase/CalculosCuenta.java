@@ -22,14 +22,18 @@ public class CalculosCuenta {
         double saldoNuevo=cuenta.getSaldo()+(cuenta.getSaldo()*cuenta.getInteres());
         cuenta.setSaldo(saldoNuevo);
     }
-    
+    // paso por referencia
     public static void ingresarDinero(Cuenta cuenta, double cantidad) {
-        cuenta.setSaldo(cuenta.getSaldo()+cantidad);
+        double cantidadPositiva= Math.abs(cantidad);
+        cuenta.setSaldo(cuenta.getSaldo()+cantidadPositiva);
     }
     
-    public static void retirarEfectivo(Cuenta cuenta, double cantidad) {
-        if (cuenta.getSaldo()>=cantidad){
+    public static boolean retirarEfectivo(Cuenta cuenta, double cantidad) {
+        if (cuenta.getSaldo()>=cantidad){  
         cuenta.setSaldo(cuenta.getSaldo()-cantidad);
+        return true;
+        } else {
+        return false;
         }
     }
 }

@@ -20,13 +20,25 @@ public class Main {
         
         CalculosCuenta.ingresarDinero(cliente1, 500);
         CalculosCuenta.ingresarIntereses(cliente1);
-        CalculosCuenta.retirarEfectivo(cliente1, 200);
+        
+        boolean comprobarOperacion=CalculosCuenta.retirarEfectivo(cliente1, 200);
+        if (!comprobarOperacion){
+           System.out.println("No se ha podido realizar la operación, saldo insuficiente");
+        } else {
+            System.out.println("""
+                               El nuevo saldo de la cuenta es %.2f
+                               """.formatted(cliente1.getSaldo()));
+        }
+        
         
         System.out.println(cliente1);
         
         CalculosCuenta.ingresarDinero(cliente2, 600);
         CalculosCuenta.ingresarIntereses(cliente2);
-        CalculosCuenta.retirarEfectivo(cliente2, 500000);
+        
+        if (!CalculosCuenta.retirarEfectivo(cliente2, 500000)){
+            System.out.println("No se ha podido realizar la operación, saldo insuficiente");
+        };
         
         System.out.println(cliente2);
         
