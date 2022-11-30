@@ -52,4 +52,13 @@ public class Persona {
     public void beberCafe(Cafetera cafetera, int cantidad) {
     cafetera.servirTaza(cantidad);
     }
+    
+    // dos métodos extra fuera del ejercicio
+    public void tirarCafe(Cafetera cafetera) { 
+    cafetera.vaciarCafetera(); 
+    }
+    
+    public void addCafe (Cafetera cafetera, double cantidadAgregar) {
+    cafetera.agregarCafe(cantidadAgregar);
+    }
 }

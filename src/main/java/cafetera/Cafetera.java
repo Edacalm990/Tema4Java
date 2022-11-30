@@ -50,8 +50,8 @@ public class Cafetera {
     }
     
     public void servirTaza(double cantidadAServir) {
-        double cantidadServirPositivo=Math.abs(cantidadActual);
-        this.cantidadActual=(cantidadServirPositivo>=this.capacidadMaxima) ? 0 : cantidadActual-cantidadServirPositivo;   
+        double cantidadServirPositivo=Math.abs(cantidadAServir);
+        this.cantidadActual=(cantidadServirPositivo<=this.capacidadMaxima) ? (this.cantidadActual-cantidadServirPositivo) : 0;   
     }
     
     public void agregarCafe(double cantidadAgregar) {
