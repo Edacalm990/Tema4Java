@@ -24,6 +24,7 @@ public class Main {
         System.out.println(cuatroDesbordada.toString());
         System.out.println(cincoNegativo.toString());
         
+        Persona uno=new Persona(87, "Pepe");
         
     }
 }

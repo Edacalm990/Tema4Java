@@ -45,5 +45,11 @@ public class Persona {
         return "Persona{" + "edad=" + edad + ", nombre=" + nombre + '}';
     }
     
+    public void hacerCafe (Cafetera cafetera) {
+    cafetera.llenarCafetera();
+    }
     
+    public void beberCafe(Cafetera cafetera, int cantidad) {
+    cafetera.servirTaza(cantidad);
+    }
 }
