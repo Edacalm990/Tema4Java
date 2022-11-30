@@ -11,7 +11,7 @@ package cafetera;
 public class Main {
     public static void main(String[] args) {
         // probando tipos de cafeteras y comprobando si funcionan las restricciones
-        Cafetera uno=new Cafetera();
+        Cafetera uno=new Cafetera(); // constructor vacio
         Cafetera dos=new Cafetera(500);
         Cafetera tres= new Cafetera (450, 200);
         Cafetera cuatroDesbordada = new Cafetera (500, 750);
@@ -23,8 +23,6 @@ public class Main {
         System.out.println(tres.toString());
         System.out.println(cuatroDesbordada.toString());
         System.out.println(cincoNegativo.toString());
-        
-        Persona uno=new Persona(87, "Pepe");
         
     }
 }
