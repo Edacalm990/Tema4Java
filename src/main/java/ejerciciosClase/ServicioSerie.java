@@ -46,4 +46,9 @@ public class ServicioSerie {
                 serie.darLike();
             }
         }
+        
+    public static Serie copia (Serie origen ) {
+    Serie aux= new Serie(origen.getTitulo(),origen.getGenero(), origen.getSinopsis(), origen.getProductor(), origen.getNumeroTemporadas(), origen.getNumeroLikes());
+    return aux;
+    }
 }

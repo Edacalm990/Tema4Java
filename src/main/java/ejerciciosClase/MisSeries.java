@@ -19,6 +19,10 @@ public class MisSeries {
         Serie peakeBlinders = ServicioSerie.leerTecladoSerie();
         System.out.println(peakeBlinders);
         ServicioSerie.darLike(peakeBlinders);
+        Serie simpson = ServicioSerie.leerTecladoSerie();
+        Serie copiaSimpson = ServicioSerie.copia(simpson);
+        System.out.println("Los ismpson son iguales a peaky blinders?" + peakeBlinders.equals(simpson));
+        System.out.println("Los ismpson son iguales a copiaSimpson?" + simpson.equals(copiaSimpson));
         
     }
 }
