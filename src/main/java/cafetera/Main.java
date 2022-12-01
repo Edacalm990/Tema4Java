@@ -29,7 +29,8 @@ public class Main {
         System.out.println(cuatroDesbordada.toString());
         System.out.println("Constructor con parametro capacidad máxima y cantidadActual mayor que capacidad máxima (probando que no lo permita)  y número negativo (lo convierta en positivo): cafetera cincoNegativo");
         System.out.println(cincoNegativo.toString());
-
+        
+        // pruebas dentro de los parametros sin persona
         uno.llenarCafetera();
         System.out.println("""
                            -------------------------------------------------------
@@ -62,7 +63,7 @@ public class Main {
                            """.formatted(uno.getCantidadActual()));
 
 
-
+        // pruebas fuera de los parametros sin persona
         uno.servirTaza(10000);
         System.out.println("""
                            ---------------------------------------------------------------------------
@@ -88,7 +89,7 @@ public class Main {
         // creando persona
         Persona pUno = new Persona(87, "Pepe");
 
-        // realizando pruebas
+        // realizando pruebas usando persona
         // uno hace cafe
         pUno.hacerCafe(uno);
         // mostrando si cantidadActual ha cambiado
@@ -115,5 +116,17 @@ public class Main {
         System.out.println("Pepe tira el café de la cafetera");
         System.out.println(uno.toString());
 
+        // PRUEBAS REALIZADAS EN CLASE SOBRE JAVA RECORD
+        PersonaR pepe = new PersonaR("pepe", 87);
+        pepe.hacerCafe(uno);
+        System.out.println(uno);
+        pepe.beberCafe(uno, 200);
+        System.out.println(uno);
+        
+        // PROBANDO EQUALS CON JAVA RECORD
+        PersonaR anabel= new PersonaR("pepe", 87);
+        
+        System.out.println(pepe.equals(anabel));
+        
     }
 }

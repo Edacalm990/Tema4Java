@@ -8,47 +8,45 @@ package cafetera;
  *
  * @author eli
  */
-/*Añade una clase Persona, con los atributos típicos de edad y nombre, constructor, getters, setters, toString. 
-Añade dos métodos, el método hacerCafe(Cafetera c) que rellena la cafetera c de café y 
-el método beberCafé(Cafetera c, int cantidad), que supone disminuir la cantidad de café indicada de la cafetera c.
-Añade un método main() y realiza pruebas de la clase Cafetera y la clase Persona.*/
+// contructor persona
 public class Persona {
+    // atributos encapsulados
     private int edad;
     private String nombre;
 
+    // constructor por defecto
     public Persona() {
     }
 
+    // contructor parametrizado
     public Persona(int edad, String nombre) {
         this.edad = edad;
         this.nombre = nombre;
     }
+    
+    // getters
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public int getEdad() {
         return edad;
     }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
+    
+    // toString
 
     @Override
     public String toString() {
         return "Persona{" + "edad=" + edad + ", nombre=" + nombre + '}';
     }
     
+    // métodos pedidos en el ejercicio
+    // llenar cafetera    
     public void hacerCafe (Cafetera cafetera) {
     cafetera.llenarCafetera();
     }
-    
+    // beber café
     public void beberCafe(Cafetera cafetera, int cantidad) {
     cafetera.servirTaza(cantidad);
     }
