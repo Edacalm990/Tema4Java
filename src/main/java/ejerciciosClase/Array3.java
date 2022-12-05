@@ -24,21 +24,39 @@ Vuelve a compararlos, indicando si son iguales o no.
 
  */
 public class Array3 {
+    
+    public static Random random= new Random();
 
     public static void main(String[] args) {
         double[] array = new double[20];
         Arrays.fill(array, 7.5);
 
         double[] arrayCopia = Arrays.copyOf(array, 20);
+        
         for (double numero : array) {
             System.out.println(numero);
         }
         for (double numero : arrayCopia) {
             System.out.println(numero);
         }
-
         
+        System.out.println("""
+                           Los arrays son iguales? %b
+                           """.formatted(Arrays.equals(array, arrayCopia)));
         
+        int posicion = random.nextInt(0, array.length);
+        array[posicion]=6.3;
+        
+        for (double numero : array) {
+            System.out.println(numero);
+        }
+        for (double numero : arrayCopia) {
+            System.out.println(numero);
+        }
+        
+        System.out.println("""
+                           Los arrays son iguales? %b
+                           """.formatted(Arrays.equals(array, arrayCopia)));
         
     }
 }

@@ -37,6 +37,7 @@ public class Array5 {
         mostrarArray(array);
         mediaPositivos(array);
         mediaNegativos(array);
+        
     }
 
     public static void addNumero(int[] array) {
