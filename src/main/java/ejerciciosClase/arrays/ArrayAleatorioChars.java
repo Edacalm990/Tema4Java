@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ejerciciosClase;
+package ejerciciosClase.arrays;
 
-import static ejerciciosClase.Capicua.teclado;
+import static ejerciciosClase.arrays.Capicua.teclado;
 import java.util.Random;
 import java.util.Arrays;
 

@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ejerciciosClase;
+package ejerciciosClase.VehiculosEnumMetodos;
+
+import ejerciciosClase.Modelo;
 
 /**
  *
@@ -24,8 +26,22 @@ public class EjemploVehiculoEnum {
         int pos = catalogo.buscarVehiculo(v);
         System.out.println(pos);
         catalogo.borrarVehiculo(catalogo.getListaVehiculos()[4]);
-        System.out.println("--------------Depsues de borrar-------------------");
+        System.out.println("--------------Después de borrar-------------------");
         catalogo.mostrarVehiculo();
+        
+        System.out.println("Nº vehiculos" + catalogo.getNumeroVehiculos()); // nº vehiculos que hay dentro del catálogo;
+        System.out.println(catalogo);
+
+        catalogo.anadirVehiculo(v);
+        System.out.println(catalogo);
+        catalogo.anadirVehiculo(v);
+        System.out.println(catalogo);
+        
+        catalogo.anadirVehiculo(v);
+        System.out.println(catalogo);
+        
+        CatalogoClientes catalogoClientes = new CatalogoClientes(20);
+        catalogoClientes.mostrarClientes();
     }
   
 }
