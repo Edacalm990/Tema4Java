@@ -40,8 +40,22 @@ public class EjemploVehiculoEnum {
         catalogo.anadirVehiculo(v);
         System.out.println(catalogo);
         
-        CatalogoClientes catalogoClientes = new CatalogoClientes(20);
+        ClienteEnum clienteUno = new ClienteEnum();
+        System.out.println("--------------------------------");
+        System.out.println(clienteUno);
+        System.out.println("--------------------------------");
+        CatalogoClientes catalogoClientes = new CatalogoClientes(5);
         catalogoClientes.mostrarClientes();
+        catalogoClientes.addCliente(clienteUno);
+        System.out.println("Número de clientes del catálogo " + catalogoClientes.getNumeroClientes());
+        System.out.println("------------------------------");
+        catalogoClientes.mostrarClientes();
+        System.out.println("--------------------");
+        
+        catalogoClientes.borrarCliente(clienteUno);
+        catalogoClientes.mostrarClientes();
+        System.out.println("--------------------");
+        System.out.println("Número de clientes del catálogo " + catalogoClientes.getNumeroClientes());
     }
   
 }

@@ -11,14 +11,20 @@ import org.apache.commons.lang3.RandomStringUtils;
  *
  * @author eli
  */
+// clase cliente
 public class ClienteEnum {
+    // atributos encapsulados
     private Nombres nombre;
     private String nif;
     private Apellidos apellido;
 
+    // contructor por defecto con parametros aleatorios
     public ClienteEnum() {
+        // nif aleatorio 8 numeros y una letra
         this.nif=RandomStringUtils.randomNumeric(8)+RandomStringUtils.randomAlphabetic(1);
+        // nombre aleatorio con una lista de nombres de una clase Enum
         this.nombre = Nombres.getAleatorio();
+        // nombre aleatorio con una lista de apellidos de una clase Enum
         this.apellido = Apellidos.getAleatorio();
     }
 
@@ -33,6 +39,7 @@ public class ClienteEnum {
         return hash;
     }
 
+    // solo será igual si los nifs son iguales
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -48,11 +55,13 @@ public class ClienteEnum {
         return Objects.equals(this.nif, other.nif);
     }
 
+    // to String por defecto
     @Override
     public String toString() {
         return "ClienteEnum{" + "nombre=" + nombre  + ", apellido=" + apellido + ", nif=" + nif + '}';
     }
 
+    // solo getters
     public Nombres getNombre() {
         return nombre;
     }
@@ -64,13 +73,7 @@ public class ClienteEnum {
     public Apellidos getApellido() {
         return apellido;
     }
-
-    public void setNif(String nif) {
-        this.nif = nif;
-    }
-    
-    
-    
+ 
     
     
     
