@@ -28,22 +28,35 @@ public class CatalogoVehiculos {
         }
     }
 
+    
     public void mostrarVehiculo() {
         for (VehiculoEnum listaVehiculo : listaVehiculos) {
             System.out.println(listaVehiculo);
         }
     }
 
-    public int buscarVehiculo(VehiculoEnum vehiculo) {
-        // Busqueda secuencial (porque hicimos un equals en vehiculos)
-        for (int i = 0; i < this.listaVehiculos.length; i++) {
-            if (vehiculo.equals(listaVehiculos[i])) {
-                return i;
-            };
-
+    
+     // método privado para buscar a un cliente
+    private int buscar(VehiculoEnum vehiculo) {
+        if (vehiculo != null) {
+            for (int i = 0; i < listaVehiculos.length; i++) {
+                // si no es null y su nif es igual devolverá la posicion
+                if (listaVehiculos[i] != null && listaVehiculos[i].equals(vehiculo)) {
+                    return i;
+                };
+            }
         }
         return -1;
     }
+
+    public VehiculoEnum buscarVehiculo(String bastidor) {
+        VehiculoEnum aux = new VehiculoEnum();
+        aux.setBastidor(bastidor);
+        int posicion = buscar(aux);
+        VehiculoEnum resultado = (posicion >= 0) ? this.listaVehiculos[posicion] : null;
+        return resultado;
+    }
+    
 
     public String toString() {
         String tmp = "";
@@ -64,7 +77,7 @@ public class CatalogoVehiculos {
     }
 
     public boolean borrarVehiculo(VehiculoEnum v) {
-        int pos = buscarVehiculo(v);
+        int pos = buscar(v);
         if (pos >= 0) {
             this.listaVehiculos[pos] = null;
             this.numeroVehiculos--;

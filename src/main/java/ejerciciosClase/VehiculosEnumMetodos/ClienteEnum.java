@@ -28,7 +28,11 @@ public class ClienteEnum {
         this.apellido = Apellidos.getAleatorio();
     }
 
+    public void setNif(String nif) {
+        this.nif = nif;
+    }
 
+    
 
     @Override
     public int hashCode() {

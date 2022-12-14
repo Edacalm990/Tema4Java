@@ -1,0 +1,93 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package ejerciciosClase.VehiculosEnumMetodos;
+
+import java.time.LocalDate;
+
+/**
+ *
+ * @author eli
+ */
+public class Alquiler {
+    
+    private int alquilerID;
+    private ClienteEnum cliente;
+    private VehiculoEnum vehiculo;
+    private LocalDate fechaInicio;
+    private int duracionDias;
+    
+    private static int contador = 0;
+
+    public Alquiler(ClienteEnum cliente, VehiculoEnum vehiculo, LocalDate fechaInicio, int duracionDias) {
+        contador++;
+        this.alquilerID= contador;
+        this.cliente = cliente;
+        this.vehiculo = vehiculo;
+        this.fechaInicio = fechaInicio;
+        this.duracionDias = duracionDias;
+    }
+
+    public Alquiler() {
+    }
+
+    public void setAlquilerID(int alquilerID) {
+        this.alquilerID = alquilerID;
+    }
+    
+    
+
+    public int getDuracionDias() {
+        return duracionDias;
+    }
+
+    public void setDuracionDias(int duracionDias) {
+        this.duracionDias = duracionDias;
+    }
+
+    public ClienteEnum getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteEnum cliente) {
+        this.cliente = cliente;
+    }
+
+    public VehiculoEnum getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(VehiculoEnum vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public int getAlquilerID() {
+        return alquilerID;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Alquiler{");
+        sb.append("alquilerID=").append(alquilerID);
+        sb.append(", cliente=").append(cliente.getNif());
+        sb.append(", vehiculo=").append(vehiculo.getBastidor());
+        sb.append(", fechaInicio=").append(fechaInicio);
+        sb.append(", duracionDias=").append(duracionDias);
+        sb.append('}');
+        return sb.toString();
+    }
+    
+   
+    
+    
+}
