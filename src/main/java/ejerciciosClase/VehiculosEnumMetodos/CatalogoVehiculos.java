@@ -29,11 +29,7 @@ public class CatalogoVehiculos {
     }
 
     
-    public void mostrarVehiculo() {
-        for (VehiculoEnum listaVehiculo : listaVehiculos) {
-            System.out.println(listaVehiculo);
-        }
-    }
+
 
     
      // método privado para buscar a un cliente

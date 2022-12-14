@@ -36,14 +36,14 @@ public class CatalogoClientes {
         return numeroClientes;
     }
 
-    // mostramos a los clientes, las posiciones null no se mostrarán
-    public void mostrarClientes() {
-        for (ClienteEnum cliente : listaClientes) {
-            if (cliente != null) {
-                System.out.println(cliente.toString());
+    public String toString() {
+        String tmp = "";
+        for (ClienteEnum v : listaClientes) {
+            if (v != null) {
+                tmp += v.toString() + "\n";
             }
-
         }
+        return tmp;
     }
 
     // método privado para buscar a un cliente

@@ -31,9 +31,14 @@ public class CatalogoAlquileres {
         return numeroAlquileres;
     }
 
-    @Override
     public String toString() {
-        return "CatalogoAlquileres{" + "listaAlquileres=" + listaAlquileres.toString() + '}';
+        String tmp = "";
+        for (Alquiler v : listaAlquileres) {
+            if (v != null) {
+                tmp += v.toString() + "\n";
+            }
+        }
+        return tmp;
     }
 
 

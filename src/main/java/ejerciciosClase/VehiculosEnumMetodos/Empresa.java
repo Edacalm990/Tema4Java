@@ -11,19 +11,19 @@ import java.util.Objects;
  * @author eli
  */
 public class Empresa {
-    
-     private String cif;
-     private String nombre;
-     private CatalogoVehiculos catVehiculo;
-     private CatalogoClientes catCliente;
-     private CatalogoAlquileres catAlquiler;
+
+    private String cif;
+    private String nombre;
+    private CatalogoVehiculos catVehiculo;
+    private CatalogoClientes catCliente;
+    private CatalogoAlquileres catAlquiler;
 
     public Empresa(String cif, String nombre) {
         this.cif = cif;
         this.nombre = nombre;
-        this.catAlquiler=new CatalogoAlquileres(5);
-        this.catCliente= new CatalogoClientes(5);
-        this.catVehiculo= new CatalogoVehiculos(5);
+        this.catAlquiler = new CatalogoAlquileres(5);
+        this.catCliente = new CatalogoClientes(5);
+        this.catVehiculo = new CatalogoVehiculos(5);
     }
 
     public String getCif() {
@@ -69,13 +69,14 @@ public class Empresa {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Empresa{");
-        sb.append("cif=").append(cif);
-        sb.append(", nombre=").append(nombre);
-        sb.append(", catVehiculo=").append(catVehiculo);
-        sb.append(", catCliente=").append(catCliente);
-        sb.append(", catAlquiler=").append(catAlquiler);
-        sb.append('}');
+        sb.append("CIF=").append(cif);
+        sb.append("\nNombre=").append(nombre);
+        sb.append("\n--------------------------------------------------------------");
+        sb.append("\n").append(catVehiculo);
+        sb.append("--------------------------------------------------------------");
+        sb.append("\n").append(catCliente);
+        sb.append("--------------------------------------------------------------");
+        sb.append("\n").append(catAlquiler);
         return sb.toString();
     }
 
@@ -100,8 +101,29 @@ public class Empresa {
         final Empresa other = (Empresa) obj;
         return Objects.equals(this.cif, other.cif);
     }
-     
+
+    public void addVehiculo(String bastidor) {
+        VehiculoEnum aux = new VehiculoEnum();
+        if (!bastidor.isBlank()) {
+        aux.setBastidor(bastidor);
+        } 
+        catVehiculo.anadirVehiculo(aux);
+    }
     
+        public void addCliente(String cif) {
+        ClienteEnum aux = new ClienteEnum();
+        if (!cif.isBlank()) {
+        aux.setNif(cif);
+        } 
+        catCliente.addCliente(aux);
+    }
     
-     
+    public VehiculoEnum buscarVehiculo (String bastidor) {
+    return catVehiculo.buscarVehiculo(bastidor);
+    }
+    
+    public ClienteEnum buscarCliente (String nif) {
+    return catCliente.buscarCliente(nif);
+    }
+
 }
