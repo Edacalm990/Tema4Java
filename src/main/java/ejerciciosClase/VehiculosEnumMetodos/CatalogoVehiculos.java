@@ -88,7 +88,6 @@ public class CatalogoVehiculos {
                 if (listaVehiculos[i] == null) {
                     listaVehiculos[i]=v;
                     this.numeroVehiculos++;
-                    System.out.println("Guardando vehiculo en posicion " + i);
                     break;
                 };
             }
@@ -96,7 +95,6 @@ public class CatalogoVehiculos {
         this.listaVehiculos = copiarListaVehiculos(this.numeroVehiculos*2);
         this.listaVehiculos[numeroVehiculos]=v;
         ++this.numeroVehiculos;
-        System.out.println("Guardando vehiculo en posicion " + numeroVehiculos);
         }
     }
     
@@ -108,6 +106,5 @@ public class CatalogoVehiculos {
         }
     return aux;
     }
-    
     
 }

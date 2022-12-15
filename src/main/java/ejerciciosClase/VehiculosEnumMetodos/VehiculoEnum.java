@@ -25,6 +25,7 @@ public class VehiculoEnum {
         this.matricula=RandomStringUtils.randomNumeric(4)+RandomStringUtils.randomAlphabetic(3);
         this.color= ColorVehiculo.getAleatorio();
         this.modelo= Modelo.getAleatorio();
+        this.disponible=true;
     }
         
 

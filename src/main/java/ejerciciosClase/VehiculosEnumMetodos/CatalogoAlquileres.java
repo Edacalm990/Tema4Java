@@ -44,11 +44,11 @@ public class CatalogoAlquileres {
 
 
     // método privado para buscar a un cliente
-    private int buscar(Alquiler vehiculo) {
-        if (vehiculo!= null) {
+    private int buscar(Alquiler alquiler) {
+        if (alquiler!= null) {
             for (int i = 0; i < listaAlquileres.length; i++) {
                 // si no es null y su nif es igual devolverá la posicion
-                if (listaAlquileres[i] != null && listaAlquileres[i].equals(vehiculo)) {
+                if (listaAlquileres[i] != null && listaAlquileres[i].equals(alquiler)) {
                     return i;
                 }
             }
@@ -98,7 +98,7 @@ public class CatalogoAlquileres {
                 if (listaAlquileres[i] == null) {
                     listaAlquileres[i] = alquiler;
                     // los sout son solamente meramente informativos para mi, para saber que el código funciona correctamente
-                    System.out.println("Se ha añadido un cliente en la posicion " + i);
+                    System.out.println("Se ha añadido un alquiler en la posicion " + i);
                     numeroAlquileres++;
                     break;
                 };

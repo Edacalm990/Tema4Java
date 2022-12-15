@@ -63,8 +63,12 @@ public class CatalogoClientes {
         ClienteEnum aux = new ClienteEnum();
         aux.setNif(nif);
         int posicion = buscar(aux);
-        ClienteEnum resultado = (posicion >= 0) ? this.listaClientes[posicion] : null;
-        return resultado;
+        if (posicion>=0 ){
+        return this.listaClientes[posicion];
+        } else {
+        return null;
+        }
+        
     }
 
     // borrará al cliente poniendo en su posicion null (llamando al método privado de buscar)

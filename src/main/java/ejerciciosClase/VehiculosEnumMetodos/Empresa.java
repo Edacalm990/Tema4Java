@@ -4,6 +4,7 @@
  */
 package ejerciciosClase.VehiculosEnumMetodos;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -105,25 +106,55 @@ public class Empresa {
     public void addVehiculo(String bastidor) {
         VehiculoEnum aux = new VehiculoEnum();
         if (!bastidor.isBlank()) {
-        aux.setBastidor(bastidor);
-        } 
+            aux.setBastidor(bastidor);
+        }
         catVehiculo.anadirVehiculo(aux);
     }
-    
-        public void addCliente(String cif) {
+
+    public void addCliente(String nif, String nombre, String apellido) {
         ClienteEnum aux = new ClienteEnum();
-        if (!cif.isBlank()) {
-        aux.setNif(cif);
-        } 
-        catCliente.addCliente(aux);
+        if (!nif.isBlank() && !nombre.isBlank() && !apellido.isBlank()) {
+            catCliente.addCliente(new ClienteEnum(nombre,nif, apellido));
+        } else {
+            catCliente.addCliente(aux);
+        }
+        
+    }
+
+    public VehiculoEnum buscarVehiculo(String bastidor) {
+        return catVehiculo.buscarVehiculo(bastidor);
+    }
+
+    public ClienteEnum buscarCliente(String nif) {
+        return catCliente.buscarCliente(nif);
     }
     
-    public VehiculoEnum buscarVehiculo (String bastidor) {
-    return catVehiculo.buscarVehiculo(bastidor);
+    private Alquiler buscarAlquiler(int id) {
+        return catAlquiler.buscarAlquiler(id);
+    }
+
+    public boolean registrarAlquiler(LocalDate fechaInicio, String bastidor, String nif, int duracionDias) {
+        VehiculoEnum vehiculo = buscarVehiculo(bastidor);
+        ClienteEnum cliente = buscarCliente(nif);
+        if (vehiculo == null || cliente == null || fechaInicio.isBefore(LocalDate.now()) || duracionDias <= 0 || !vehiculo.isDisponible()) {
+            return false;
+        } else {
+            Alquiler aux = new Alquiler(cliente, vehiculo, fechaInicio, duracionDias);
+            catAlquiler.addAlquiler(aux);
+            aux.getVehiculo().setDisponible(false);
+            return true;
+        }
     }
     
-    public ClienteEnum buscarCliente (String nif) {
-    return catCliente.buscarCliente(nif);
+    public boolean recibirVehiculo(int id){
+        Alquiler aux= buscarAlquiler(id);
+        if (aux!=null) {
+        aux.getVehiculo().setDisponible(true);
+        return true;
+        } else {
+        return false;
+        }
+    
     }
 
 }

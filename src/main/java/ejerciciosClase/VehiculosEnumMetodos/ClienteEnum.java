@@ -14,19 +14,27 @@ import org.apache.commons.lang3.RandomStringUtils;
 // clase cliente
 public class ClienteEnum {
     // atributos encapsulados
-    private Nombres nombre;
+    private String nombre;
     private String nif;
-    private Apellidos apellido;
+    private String apellido;
 
     // contructor por defecto con parametros aleatorios
     public ClienteEnum() {
         // nif aleatorio 8 numeros y una letra
         this.nif=RandomStringUtils.randomNumeric(8)+RandomStringUtils.randomAlphabetic(1);
         // nombre aleatorio con una lista de nombres de una clase Enum
-        this.nombre = Nombres.getAleatorio();
+        this.nombre = RandomStringUtils.randomAlphabetic(8);
         // nombre aleatorio con una lista de apellidos de una clase Enum
-        this.apellido = Apellidos.getAleatorio();
+        this.apellido = RandomStringUtils.randomAlphabetic(8);
     }
+
+    public ClienteEnum(String nombre, String nif, String apellido) {
+        this.nombre = nombre;
+        this.nif = nif;
+        this.apellido = apellido;
+    }
+    
+    
 
     public void setNif(String nif) {
         this.nif = nif;
@@ -66,7 +74,7 @@ public class ClienteEnum {
     }
 
     // solo getters
-    public Nombres getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
@@ -74,7 +82,7 @@ public class ClienteEnum {
         return nif;
     }
 
-    public Apellidos getApellido() {
+    public String getApellido() {
         return apellido;
     }
  
