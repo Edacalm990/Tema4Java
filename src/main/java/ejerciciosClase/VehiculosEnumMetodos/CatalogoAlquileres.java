@@ -19,9 +19,9 @@ public class CatalogoAlquileres {
     public CatalogoAlquileres(int tamanio) {
         // lo ponemos en positivo por si acaso
         tamanio = Math.abs(tamanio);
-        // ponemos el numero de clientes igual al tamaño
+        // ponemos el numero de alquileres igual al tamaño
         this.numeroAlquileres = 0;
-        // creamos la lista de clientes del tamaño correspondiente
+        // creamos la lista de alquileres del tamaño correspondiente
         this.listaAlquileres = new Alquiler[tamanio];
 
         
@@ -43,11 +43,11 @@ public class CatalogoAlquileres {
 
 
 
-    // método privado para buscar a un cliente
+    // método privado para buscar alquiler
     private int buscar(Alquiler alquiler) {
         if (alquiler!= null) {
             for (int i = 0; i < listaAlquileres.length; i++) {
-                // si no es null y su nif es igual devolverá la posicion
+                // si no es null y su id es igual devolverá la posicion
                 if (listaAlquileres[i] != null && listaAlquileres[i].equals(alquiler)) {
                     return i;
                 }
@@ -56,6 +56,7 @@ public class CatalogoAlquileres {
         return -1;
     }
 
+    // busca la posicion de un alquiler
     public Alquiler buscarAlquiler(int id) {
         Alquiler aux = new Alquiler();
         aux.setAlquilerID(id);
@@ -63,7 +64,7 @@ public class CatalogoAlquileres {
        return (posicion >= 0) ? this.listaAlquileres[posicion] : null;
     }
 
-    // borrará al cliente poniendo en su posicion null (llamando al método privado de buscar)
+    // borrará el alquiler poniendo en su posicion null (llamando al método privado de buscar)
     public void borrarAlquiler(Alquiler alquiler) {
         int posicion = buscar(alquiler);
         if (posicion != -1) {
@@ -81,7 +82,7 @@ public class CatalogoAlquileres {
         int size = (tamanio > this.listaAlquileres.length) ? tamanio : this.listaAlquileres.length;
         // crea la lista nueva
         Alquiler[] listaNueva = new Alquiler[size];
-        // copia a cada cliente
+        // pone el contenido de la lista antigua en la lista nueva
         for (int i = 0; i < listaAlquileres.length; i++) {
             listaNueva[i] = listaAlquileres[i];
         }
@@ -89,7 +90,7 @@ public class CatalogoAlquileres {
         return listaNueva;
     }
 
-    // método que añade un cliente 
+    // método que añade un alquiler 
     public void addAlquiler(Alquiler alquiler) {
         // comprueba que la lista es suficientemente grande
         if (numeroAlquileres < this.listaAlquileres.length) {

@@ -13,6 +13,7 @@ import java.util.Random;
 public enum Nombres {
     PEPE, BLANCA, TATIANA, MARCO, LIA, ASUNCION;
     
+    // método random para elegir nombre
     public static Nombres getAleatorio () {
         var r=new Random();
         Nombres [] nombres=Nombres.values();

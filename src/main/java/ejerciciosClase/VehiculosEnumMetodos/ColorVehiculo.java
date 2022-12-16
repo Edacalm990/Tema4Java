@@ -13,6 +13,7 @@ import java.util.Random;
 public enum ColorVehiculo {
     ROJO, NEGRO, AMARILLO, VERDE, AZUL, BLANCO;
     
+    // método para poner de forma aleatoria un color
     public static ColorVehiculo getAleatorio () {
         var r=new Random();
         ColorVehiculo [] colores=ColorVehiculo.values();

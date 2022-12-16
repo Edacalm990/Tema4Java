@@ -46,7 +46,7 @@ public class CatalogoClientes {
         return tmp;
     }
 
-    // método privado para buscar a un cliente
+    // método privado para buscar la posicion de un cliente
     private int buscar(ClienteEnum cliente) {
         if (cliente != null) {
             for (int i = 0; i < listaClientes.length; i++) {
@@ -59,6 +59,7 @@ public class CatalogoClientes {
         return -1;
     }
 
+    // método que busca a un cliente llamando al método que encuentra la posicion y devuelve al cliente
     public ClienteEnum buscarCliente(String nif) {
         ClienteEnum aux = new ClienteEnum();
         aux.setNif(nif);

@@ -21,6 +21,34 @@ public class ListaNumeros {
         listaEnteros.add(6);
         
         System.out.println(listaEnteros.size());
+        
+        for (int i = 0; i < listaEnteros.size(); i++) {
+            Integer get = listaEnteros.get(i);
+            System.out.println(get);
+            
+        }
+        if (listaEnteros.contains(7)){
+            System.out.println("El 7 está en la lista");
+        };
+        
+        int posicion =  listaEnteros.indexOf(6);
+        System.out.println(posicion);
+        
+        listaEnteros.remove(new Integer(10));
+        for (int i = 0; i < listaEnteros.size(); i++) {
+            Integer get = listaEnteros.get(i);
+            System.out.println(get);
+            
+        }
+        
+        listaEnteros.forEach(e->System.out.println(e));
+        listaEnteros.forEach(System.out::println);
+        
+        for (Integer num : listaEnteros) {
+            System.out.println("Lista de numeros "+num);
+        }
+        
+        
     }
     
 }

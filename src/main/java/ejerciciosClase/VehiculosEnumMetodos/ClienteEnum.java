@@ -28,19 +28,17 @@ public class ClienteEnum {
         this.apellido = RandomStringUtils.randomAlphabetic(8);
     }
 
+    // contructor pasandole parámetros
     public ClienteEnum(String nombre, String nif, String apellido) {
         this.nombre = nombre;
         this.nif = nif;
         this.apellido = apellido;
     }
     
-    
-
+    // setter para cambiar el nif
     public void setNif(String nif) {
         this.nif = nif;
     }
-
-    
 
     @Override
     public int hashCode() {
