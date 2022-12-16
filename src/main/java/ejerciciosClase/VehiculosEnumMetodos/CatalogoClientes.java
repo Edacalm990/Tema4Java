@@ -77,8 +77,6 @@ public class CatalogoClientes {
         if (posicion != -1) {
             listaClientes[posicion] = null;
             numeroClientes--;
-            // los sout son solamnete meramente informativos para mi, para saber que el código funciona correctamente
-            System.out.println("Se ha borrado el cliente de la posicion " + posicion);
         }
     }
 
@@ -107,7 +105,6 @@ public class CatalogoClientes {
                 if (listaClientes[i] == null) {
                     listaClientes[i] = cliente;
                     // los sout son solamente meramente informativos para mi, para saber que el código funciona correctamente
-                    System.out.println("Se ha añadido un cliente en la posicion " + i);
                     numeroClientes++;
                     break;
                 };

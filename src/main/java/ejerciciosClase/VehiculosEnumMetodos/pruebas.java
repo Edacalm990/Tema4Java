@@ -5,63 +5,57 @@
 package ejerciciosClase.VehiculosEnumMetodos;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
  *
  * @author eli
  */
-/*
-menu mostrar vehiculos, mostrar clientes, mostrar alquileres
-Dar de alta clientes, dar de alta vehiculos, registrar alquileres
-
- */
 public class pruebas {
-    
+
     public static Scanner teclado = new Scanner(System.in);
-    
+
     public static void main(String[] args) {
+        // Creamos una empresa ficticia
         Empresa rentacar = new Empresa("1234", "rentacar");
-        int opcion = 0;
+        String opcion = "";
         do {
-            
+            // pedimos la opcion del menú, si es 7 el programa saldrá
             opcion = menu();
+            
             switch (opcion) {
-                case 1:
+                case "1": // si es la primera opción mostraremos una lista con todos los vehiculos    
                     System.out.println(rentacar.getCatVehiculo());
-                    teclado.nextLine();
                     break;
-                case 2:
+                case "2":// si es la opcion 2 mostraremos lista de clientes
                     System.out.println(rentacar.getCatCliente());
-                    teclado.nextLine();
                     break;
-                case 3:
+                case "3": // si es la opcion 3 mostraremos lista de Alquileres
                     System.out.println(rentacar.getCatAlquiler());
-                    teclado.nextLine();
                     break;
-                case 4:
+                case "4": // si es la opcion 4 se llamara al método que da de alta a un cliente
                     darAltaCliente(rentacar);
-                    teclado.nextLine();
                     break;
-                case 5:
+                case "5": // si es la opcion 5 se llamara al método que da de alta a un vehiculo
                     darAltaVehiculos(rentacar);
-                    teclado.nextLine();
                     break;
-                case 6:                
-                    resgistrarAlquiler(rentacar);
-                    teclado.nextLine();
+                case "6": // si es la opcion 6 se llamara al método para registrar un alquiler
+                    resgistrarAlquiler(rentacar); 
                     break;
                 default:
-                    teclado.nextLine();
-                    throw new AssertionError();
+                    System.out.println("Adios!");;
             }
-        } while (opcion != 7);
-        
+            // se sale del programa si se introduce un 7
+        } while (!opcion.equals("7"));
+
     }
-    
-    private static int menu() {
-        int opcion = 0;
+
+    private static String menu() {
+        // se crea un menú con 7 opciones y solo te dejará introducir un valor válido
+        String opcion = "";
         do {
+            try {
             System.out.println("""
                            ********************** RENTACAR **********************
                            Elige una opción:
@@ -75,60 +69,122 @@ public class pruebas {
                                 
                                 7. SALIR
                            """);
-            try {
-                opcion = teclado.nextInt();
+                opcion=teclado.nextLine();
+                if (!opcion.equals("1")
+                        && !opcion.equals("2")
+                        && !opcion.equals("3")
+                        && !opcion.equals("4")
+                        && !opcion.equals("5")
+                        && !opcion.equals("6")
+                        && !opcion.equals("7")) {
+                    throw new Exception();
+                }
             } catch (Exception e) {
-                System.out.println("Debe ser un número entero y positivo");
+                System.out.println("Debe ser una opcion del menú");
             }
-            
-        } while (opcion < 1 || opcion > 7);
-        
+
+        } while (!opcion.equals("1")
+                && !opcion.equals("2")
+                && !opcion.equals("3")
+                && !opcion.equals("4")
+                && !opcion.equals("5")
+                && !opcion.equals("6")
+                && !opcion.equals("7"));
+
         return opcion;
     }
-    
+
+    // método para pedir un dato
     private static String pedirDato(String texto) {
         System.out.println(texto);
         return teclado.nextLine();
     }
-    
+
+    // método para dar de alta un cliente
     private static void darAltaCliente(Empresa empresa) {
-        teclado.nextLine();
         System.out.println("********************** DAR DE ALTA CLIENTE **********************");
         String nombre = pedirDato("Nombre: ");
         String apellido = pedirDato("Apellido: ");
         String nif = pedirDato("Nif: ");
         empresa.addCliente(nif, nombre, apellido);
+        System.out.println("""
+                           Se ha añadido un cliente correctamente
+                           Nombre: %s
+                           Apellido: %s
+                           Nif: %s
+                           """.formatted(nombre,apellido, nif));
     }
-    
+
+    // método para dar de alta un vehiculo
     private static void darAltaVehiculos(Empresa empresa) {
         System.out.println("********************** DAR DE ALTA VEHICULO **********************");
         String bastidor = pedirDato("Bastidor del coche: ");
-        empresa.addVehiculo(bastidor);
+        String matricula = pedirDato("Cual es su matricula: ");
+        empresa.addVehiculo(bastidor, matricula);
+        // si no se introducen datos se crean de forma aleatoria
+        System.out.println("""
+                           Se ha añadido un cliente correctamente
+                           Bastidor: %s
+                           Matricula: %s
+                           """.formatted(empresa.buscarVehiculo(bastidor).getBastidor(), 
+                                   empresa.buscarVehiculo(bastidor).getMatricula()));
     }
-    
+
+    // método para registrar un vehiculo
     private static void resgistrarAlquiler(Empresa empresa) {
         System.out.println("********************** REGISTRAR ALQUILER **********************");
-        LocalDate fecha=LocalDate.now();
+        LocalDate fecha = LocalDate.now();
+        String bastidor="";
+        String nif="";
+        int dias = -1;
         do {
             try {
-                fecha = LocalDate.parse(pedirDato("Fecha del incio del alquiler: "));                
-            } catch (Exception e) {
-                System.out.println("Debe tener el siguiente formato YYYY-MM-DD");
+                // controlamos que el dato sea correcto sino devolvemos una excepcion
+                String fechaString= pedirDato("Fecha del incio del alquiler: ");
+                fecha = LocalDate.parse(fechaString);
+            } catch (DateTimeParseException e) {
+                System.out.println(e+"\n"+"Debe tener el siguiente formato YYYY-MM-DD");
                 teclado.nextLine();
             }
         } while (fecha.isBefore(LocalDate.now()));
-        String bastidor = pedirDato("Bastidor del coche: ");
-        String nif = pedirDato("Nif del cliente: ");
-        int dias=0;
+        
+        do {
+             // controlamos que el dato sea correcto sino devolvemos una excepcion
+            bastidor= pedirDato("Bastidor del coche: ");
+            if (empresa.buscarVehiculo(bastidor)==null) {
+                System.out.println("El vehiculo no existe porfavor pon un bastidor válido");
+            }
+        } while (empresa.buscarVehiculo(bastidor)==null);
+        
+        do {
+             // controlamos que el dato sea correcto sino devolvemos una excepcion
+            nif = pedirDato("Nif del cliente: ");
+            if (empresa.buscarCliente(nif)==null) {
+                System.out.println("El cliente no existe porfavor pon un cliente válido");
+            }
+        } while ( empresa.buscarCliente(nif)==null);
+        
         do {
             try {
-                dias= Integer.parseInt(pedirDato("Días de alquiler: "));
-            } catch (Exception e) {
-                System.out.println("Dias debe ser un número entero y positivo");
+                 // controlamos que el dato sea correcto sino devolvemos una excepcion
+                dias = Integer.parseInt(pedirDato("Días de alquiler: "));
+                if (dias<=0){
+                throw new NumberFormatException();
+                }
+            } catch (NumberFormatException e) {                    
+                System.out.println(e+"\n"+"Dias debe ser un número entero y positivo");
+                teclado.nextLine();
             }
-        } while (dias>0);
-        
-        empresa.registrarAlquiler(fecha,bastidor,nif,dias);
+        } while (dias < 0);
+        // se registra y se muestra
+        empresa.registrarAlquiler(fecha, bastidor, nif, dias);
+        System.out.println("""
+                           Se ha añadido el registro correctamente. 
+                           Fecha: %s
+                           Bastidor: %s
+                           Nif: %s
+                           Dias: %d
+                           """.formatted(fecha,bastidor,nif,dias));
     }
-    
+
 }

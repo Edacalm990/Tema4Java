@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ejerciciosClase.VehiculosEnumMetodos;
+
 import java.util.Arrays;
 
 /**
@@ -28,11 +29,7 @@ public class CatalogoVehiculos {
         }
     }
 
-    
-
-
-    
-     // método privado para buscar a un cliente
+    // método privado para buscar a un cliente
     private int buscar(VehiculoEnum vehiculo) {
         if (vehiculo != null) {
             for (int i = 0; i < listaVehiculos.length; i++) {
@@ -45,6 +42,7 @@ public class CatalogoVehiculos {
         return -1;
     }
 
+    // s ebusca un vehiculo por el bastidor, si no lo encuentra devuelve un vehiculo con valor null
     public VehiculoEnum buscarVehiculo(String bastidor) {
         VehiculoEnum aux = new VehiculoEnum();
         aux.setBastidor(bastidor);
@@ -52,7 +50,6 @@ public class CatalogoVehiculos {
         VehiculoEnum resultado = (posicion >= 0) ? this.listaVehiculos[posicion] : null;
         return resultado;
     }
-    
 
     public String toString() {
         String tmp = "";
@@ -72,6 +69,7 @@ public class CatalogoVehiculos {
         return listaVehiculos;
     }
 
+    // se borra un vehiculo poniendo en la posicion donde estaba el vehiculo a null
     public boolean borrarVehiculo(VehiculoEnum v) {
         int pos = buscar(v);
         if (pos >= 0) {
@@ -82,29 +80,33 @@ public class CatalogoVehiculos {
         return false;
     }
 
+    // se añade un vehiculo en la primera posicion null que encuentre 
     public void anadirVehiculo(VehiculoEnum v) {
+        // si hay espacio
         if (this.listaVehiculos.length > this.getNumeroVehiculos()) {
             for (int i = 0; i < listaVehiculos.length; i++) {
                 if (listaVehiculos[i] == null) {
-                    listaVehiculos[i]=v;
+                    listaVehiculos[i] = v;
                     this.numeroVehiculos++;
                     break;
                 };
             }
+            // si no hay espacio crea y copia el array existente con un tamaño mayor y pone el nuevo vehiculo 
+            // en la siguiente posicion valida
         } else {
-        this.listaVehiculos = copiarListaVehiculos(this.numeroVehiculos*2);
-        this.listaVehiculos[numeroVehiculos]=v;
-        ++this.numeroVehiculos;
+            this.listaVehiculos = copiarListaVehiculos(this.numeroVehiculos * 2);
+            this.listaVehiculos[numeroVehiculos] = v;
+            ++this.numeroVehiculos;
         }
     }
-    
-    // método copiar
-    private VehiculoEnum [] copiarListaVehiculos (int tamanio){
-    VehiculoEnum [] aux= new VehiculoEnum[tamanio];
+
+    // método copiar propio, crea un array nuevo vacio del tamaño que se le indique y asigna en cada posicion el dato del anterior array
+    private VehiculoEnum[] copiarListaVehiculos(int tamanio) {
+        VehiculoEnum[] aux = new VehiculoEnum[tamanio];
         for (int i = 0; i < this.listaVehiculos.length; i++) {
-            aux[i]=listaVehiculos[i];
+            aux[i] = listaVehiculos[i];
         }
-    return aux;
+        return aux;
     }
-    
+
 }

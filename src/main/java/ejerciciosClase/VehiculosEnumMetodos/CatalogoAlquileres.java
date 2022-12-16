@@ -98,7 +98,6 @@ public class CatalogoAlquileres {
                 if (listaAlquileres[i] == null) {
                     listaAlquileres[i] = alquiler;
                     // los sout son solamente meramente informativos para mi, para saber que el código funciona correctamente
-                    System.out.println("Se ha añadido un alquiler en la posicion " + i);
                     numeroAlquileres++;
                     break;
                 };

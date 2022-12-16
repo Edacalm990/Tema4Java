@@ -12,7 +12,10 @@ import org.apache.commons.lang3.RandomStringUtils;
  *
  * @author eli
  */
+// he puesto vehiculoEnum para diferenciarlo del primer ejercicio que hicimos que se llamaba vehiculo
 public class VehiculoEnum {
+
+    // atributos encapsulados de vehiculo
     private String bastidor;
     private String matricula;
     private ColorVehiculo color;
@@ -20,20 +23,21 @@ public class VehiculoEnum {
     private boolean disponible;
     private double tarifa;
 
+    // contructor por defecto con datos generados de forma aleatoria
     public VehiculoEnum() {
-        this.bastidor=RandomStringUtils.randomAlphanumeric(10);
-        this.matricula=RandomStringUtils.randomNumeric(4)+RandomStringUtils.randomAlphabetic(3);
-        this.color= ColorVehiculo.getAleatorio();
-        this.modelo= Modelo.getAleatorio();
-        this.disponible=true;
+        this.bastidor = RandomStringUtils.randomAlphanumeric(10);
+        this.matricula = RandomStringUtils.randomNumeric(4) + RandomStringUtils.randomAlphabetic(3);
+        this.color = ColorVehiculo.getAleatorio();
+        this.modelo = Modelo.getAleatorio();
+        this.disponible = true;
     }
-        
 
     @Override
     public String toString() {
         return "VehiculoEnum{" + "bastidor=" + bastidor + ", matricula=" + matricula + ", color=" + color + ", modelo=" + modelo + ", disponible=" + disponible + ", tarifa=" + tarifa + '}';
     }
 
+    //getter y setter
     public String getBastidor() {
         return bastidor;
     }
@@ -84,16 +88,12 @@ public class VehiculoEnum {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.bastidor);
-        hash = 53 * hash + Objects.hashCode(this.matricula);
-        hash = 53 * hash + Objects.hashCode(this.color);
-        hash = 53 * hash + Objects.hashCode(this.modelo);
-        hash = 53 * hash + (this.disponible ? 1 : 0);
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.tarifa) ^ (Double.doubleToLongBits(this.tarifa) >>> 32));
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.bastidor);
         return hash;
     }
 
+    // dos vehiculos serán iguales si tienen el mismo bastidor
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -106,9 +106,7 @@ public class VehiculoEnum {
             return false;
         }
         final VehiculoEnum other = (VehiculoEnum) obj;
-        
-        return this.bastidor == other.bastidor;
+        return Objects.equals(this.bastidor, other.bastidor);
     }
-    
-    
+
 }
