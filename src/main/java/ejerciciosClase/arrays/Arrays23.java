@@ -22,16 +22,72 @@ Crear una tercera lista que contenga los elementos que están en la lista 1 y NO
 Imprimir la tercera lista. 
 Crear una cuarta lista que contenga los elementos de la lista 1 que son pares y los elementos de la lista 2 que son impares 
 Imprimir la cuarta lista. Usa una expresión lambda.
-*/
+ */
 public class Arrays23 {
+
     public static Random random = new Random();
+    public static final int MIN_UNO = 5;
+    public static final int MAX_UNO = 15;
+    public static final int MIN_DOS = 10;
+    public static final int MAX_DOS = 20;
+    public static final int MIN_RANGO = 50;
+    public static final int MAX_RANGO = 100;
+
     public static void main(String[] args) {
+
+        ArrayList<Integer> listaUno = new ArrayList<>();
+        ArrayList<Integer> listaDos = new ArrayList<>();
+        ArrayList<Integer> listaTres = new ArrayList<>();
+        ArrayList<Integer> listaCuatro = new ArrayList<>();
+
+        addNumeros(MIN_RANGO, MAX_RANGO, listaUno, MIN_UNO, MAX_UNO);
+        addNumeros(MIN_RANGO, MAX_RANGO, listaDos, MIN_DOS, MAX_DOS);
+
+        mostrarLista(listaUno, "------------ LISTA UNO ------------");
+        mostrarLista(listaDos, "------------ LISTA DOS ------------");
         
-        ArrayList<Integer> listaUno = new ArrayList<>(random.nextInt(5, 16));
-        ArrayList<Integer> listaDos = new ArrayList<>(random.nextInt(10, 21));
+        listaNumDif(listaUno, listaDos, listaTres);
+        mostrarLista(listaTres, "------------ LISTA TRES ------------");
         
-        listaUno.forEach(e->listaUno.set(e, random.nextInt(10)));
-        
-        
+        listaParesImpares(listaUno, listaDos, listaCuatro);
+        mostrarLista(listaCuatro, "------------ LISTA CUATRO ------------");
+
     }
+
+    public static void addNumeros(int origen, int fin, ArrayList array, int sizeMin, int sizeMax) {
+        for (int i = 0; i < random.nextInt(sizeMin, sizeMax + 1); i++) {
+            array.add(random.nextInt(origen, fin + 1));
+        }
+    }
+
+    public static void mostrarLista(ArrayList array, String texto) {
+        System.out.println(texto);
+        array.forEach(System.out::println);
+        System.out.println("-----------------------------------");
+    }
+
+    public static void listaNumDif(ArrayList listaUno, ArrayList listaDos, ArrayList listaTres) {
+        for (int numeroUno = 0; numeroUno < listaUno.size(); numeroUno++) {
+            if (!listaDos.contains(listaUno.get(numeroUno))){
+            listaTres.add(listaUno.get(numeroUno));
+            };
+            
+        }
+    }
+    
+    public static void listaParesImpares (ArrayList<Integer>listaUno, ArrayList<Integer> listaDos, ArrayList<Integer> resultado){
+        for (int i = 0; i < listaUno.size(); i++) {
+            int numero = Integer.parseInt(listaUno.get(i).toString());
+            if(numero%2==0){
+            resultado.add(listaUno.get(i));
+            }
+        }
+        for (Integer num : listaDos) {
+            if (num%2!=0){
+            resultado.add(num);
+            }
+        }  
+    }
+    
+    
 }

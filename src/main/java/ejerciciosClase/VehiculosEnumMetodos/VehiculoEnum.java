@@ -34,7 +34,19 @@ public class VehiculoEnum {
 
     @Override
     public String toString() {
-        return "VehiculoEnum{" + "bastidor=" + bastidor + ", matricula=" + matricula + ", color=" + color + ", modelo=" + modelo + ", disponible=" + disponible + ", tarifa=" + tarifa + '}';
+        return 
+                """
+                Vehiculo 
+                        BASTIDOR -> %s
+                        MATRICULA -> %s
+                        COLOR -> %s
+                        MODELO -> %s
+                        MARCA -> %s
+                        CILINDRADA -> %s
+                        DISPONIBLE -> %b
+                        TARIFA -> %.2f
+                """.formatted(bastidor ,matricula, color, modelo.getModelo(),modelo.getMarca(), modelo.getCilindrada(), disponible, tarifa);
+                //"VehiculoEnum{" + "bastidor=" + bastidor + ", matricula=" + matricula + ", color=" + color + ", modelo=" + modelo + ", disponible=" + disponible + ", tarifa=" + tarifa + '}';
     }
 
     //getter y setter

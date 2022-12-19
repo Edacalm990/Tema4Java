@@ -68,7 +68,12 @@ public class ClienteEnum {
     // to String por defecto
     @Override
     public String toString() {
-        return "ClienteEnum{" + "nombre=" + nombre  + ", apellido=" + apellido + ", nif=" + nif + '}';
+        return """
+               Cliente
+                    NIF -> %s
+                    NOMBRE -> %s
+                    APELLIDO -> %s
+               """.formatted(nif,nombre,apellido);
     }
 
     // solo getters

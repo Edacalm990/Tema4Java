@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  * @author eli
  */
-public class pruebas {
+public class Main {
 
     public static Scanner teclado = new Scanner(System.in);
 
@@ -32,7 +32,15 @@ public class pruebas {
                     System.out.println(rentacar.getCatCliente());
                     break;
                 case "3": // si es la opcion 3 mostraremos lista de Alquileres
-                    System.out.println(rentacar.getCatAlquiler());
+                    if (rentacar.getCatAlquiler().getNumeroAlquileres()==0){
+                        System.out.println("""
+                                           NO HAY ALQUILERES ACTUALMENTE
+                                           """);
+                    } else {
+                        System.out.println(rentacar.getCatAlquiler());
+                        
+                    }
+                            
                     break;
                 case "4": // si es la opcion 4 se llamara al método que da de alta a un cliente
                     darAltaCliente(rentacar);

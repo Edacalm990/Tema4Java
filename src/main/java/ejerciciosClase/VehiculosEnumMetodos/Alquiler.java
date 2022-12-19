@@ -77,13 +77,13 @@ public class Alquiler {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Alquiler{");
-        sb.append("alquilerID=").append(alquilerID);
-        sb.append(", cliente=").append(cliente.getNif());
-        sb.append(", vehiculo=").append(vehiculo.getBastidor());
-        sb.append(", fechaInicio=").append(fechaInicio);
-        sb.append(", duracionDias=").append(duracionDias);
-        sb.append('}');
+        sb.append("""
+                  ID Alquiler -> %d
+                        NIF DEL CLIENTE -> %s
+                        BASTIDOR DEL VEHICULO -> %s
+                        FECHA -> %s
+                        DURACION -> %d dias
+                  """.formatted(alquilerID, cliente.getNif(), vehiculo.getBastidor(), fechaInicio, duracionDias));
         return sb.toString();
     }
 
