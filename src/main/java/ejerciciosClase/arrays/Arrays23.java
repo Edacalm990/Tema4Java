@@ -45,10 +45,10 @@ public class Arrays23 {
 
         mostrarLista(listaUno, "------------ LISTA UNO ------------");
         mostrarLista(listaDos, "------------ LISTA DOS ------------");
-        
+
         listaNumDif(listaUno, listaDos, listaTres);
         mostrarLista(listaTres, "------------ LISTA TRES ------------");
-        
+
         listaParesImpares(listaUno, listaDos, listaCuatro);
         mostrarLista(listaCuatro, "------------ LISTA CUATRO ------------");
 
@@ -66,28 +66,32 @@ public class Arrays23 {
         System.out.println("-----------------------------------");
     }
 
-    public static void listaNumDif(ArrayList listaUno, ArrayList listaDos, ArrayList listaTres) {
-        for (int numeroUno = 0; numeroUno < listaUno.size(); numeroUno++) {
-            if (!listaDos.contains(listaUno.get(numeroUno))){
-            listaTres.add(listaUno.get(numeroUno));
-            };
-            
+    public static void listaNumDif(ArrayList<Integer> listaUno, ArrayList<Integer> listaDos, ArrayList<Integer> listaTres) {
+        for (int i = 0; i < listaUno.size(); i++) {
+            if (!listaDos.contains(listaUno.get(i))) {
+                listaTres.add(listaUno.get(i));
+            }
+
         }
+//        for (Integer numero : listaUno) {
+//            if (!listaDos.contains(numero)) {
+//                listaTres.add(numero);
+//            }
+//        }
     }
-    
-    public static void listaParesImpares (ArrayList<Integer>listaUno, ArrayList<Integer> listaDos, ArrayList<Integer> resultado){
+
+    public static void listaParesImpares(ArrayList<Integer> listaUno, ArrayList<Integer> listaDos, ArrayList<Integer> resultado) {
         for (int i = 0; i < listaUno.size(); i++) {
             int numero = Integer.parseInt(listaUno.get(i).toString());
-            if(numero%2==0){
-            resultado.add(listaUno.get(i));
+            if (numero % 2 == 0) {
+                resultado.add(listaUno.get(i));
             }
         }
         for (Integer num : listaDos) {
-            if (num%2!=0){
-            resultado.add(num);
+            if (num % 2 != 0) {
+                resultado.add(num);
             }
-        }  
+        }
     }
-    
-    
+
 }
