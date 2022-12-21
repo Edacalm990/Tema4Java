@@ -5,6 +5,8 @@
 package ejerciciosClase.arrays;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -61,8 +63,40 @@ public class ListaReproduccion {
     
     // grabarCancion(Cancion): agrega al final de la lista la Cancion proporcionada.
     public void grabarCancion(Cancion cancion){
-        lista.add(-1, cancion);
+        lista.add(cancion);
     }
     
+    //eliminaCancion(int): elimina la Cancion que se encuentra en la posición indicada.
+    public void eliminarCancion(int posicion){
+        lista.remove(posicion);
+    }
+    
+    //eliminaCancion(Cancion c), elimina el objeto c si se encuentra en la lista de reproducción. Usa el método remove(Cancion)
+    public void eliminarCancion(Cancion c){
+        lista.remove(c);
+    }
+    
+    //imprimirLista (ListaReproduccion tmp). Método de clase que imprime los nombres de las canciones contenidas en tmp.
+    public static void imprimirLista(ListaReproduccion tmp){
+        tmp.lista.forEach(System.out::println);
+    }
+    
+    //buscarCancion(Cancion c), busca la canción c en la lista de reproducción y devuelve la posición en la que se encuentra. Usa el método indexOf.
+    public int buscarCancion(Cancion c){
+        return lista.indexOf(c);
+    }
+    
+    // ncluye un par de métodos de ordenación (por ejemplo, por título y por cantante) 
+    //usando el método Collections.sort(lista, criterioComparator)
+    public void ordenarCancionTitulo(){
+       // Collections.sort(lstEmployees, (x, y) -> x.getName().compareToIgnoreCase(y.getName()));
+       Collections.sort(lista, (x,y) -> x.getAutor().compareToIgnoreCase(y.getAutor()));
+        lista.forEach(System.out::println);
+    }
+    
+    public void ordenarCancionAutor(){
+        Collections.sort(lista, (cancionUno, cancionDos)-> cancionUno.getAutor().compareToIgnoreCase(cancionDos.getAutor()));
+        lista.forEach(System.out::println);
+    }
     
 }
