@@ -20,6 +20,9 @@ public class mainCancion {
         lista.grabarCancion(cancionUno);
         lista.grabarCancion(cancionDos);
         lista.grabarCancion(cancionTres);
+        System.out.println("Lista de Canciones");
+        ListaReproduccion.imprimirLista(lista);
+        
          System.out.println("""
                            La lista está vacia? %b
                            """.formatted(lista.estaVacia()));
@@ -37,10 +40,14 @@ public class mainCancion {
                            Posicion 0: 
                            %s
                            """.formatted(lista.escucharCancion(0)));
+        System.out.println("Eliminar la cancion 2");
+        lista.eliminarCancion(cancionDos);
         ListaReproduccion.imprimirLista(lista);
-        System.out.println("---------------------");
-        lista.ordenarCancionTitulo();
-        System.out.println("---------------------");
+        System.out.println("----------- Ordenar por Autor ----------");
         lista.ordenarCancionAutor();
+        ListaReproduccion.imprimirLista(lista);
+        System.out.println("----------- Ordenar por Título ----------");
+        lista.ordenarCancionTitulo();
+        ListaReproduccion.imprimirLista(lista);
     }
 }

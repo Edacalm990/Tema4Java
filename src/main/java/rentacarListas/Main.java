@@ -4,6 +4,7 @@
  */
 package rentacarListas;
 
+import com.sun.source.tree.BreakTree;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -32,7 +33,7 @@ public class Main {
                     System.out.println(rentacar.getCatCliente());
                     break;
                 case "3": // si es la opcion 3 mostraremos lista de Alquileres
-                    if (rentacar.getCatAlquiler().getNumeroVehiculo()==0){
+                    if (rentacar.getCatAlquiler().getNumeroElementos()==0){
                         System.out.println("""
                                            NO HAY ALQUILERES ACTUALMENTE
                                            """);
@@ -51,11 +52,15 @@ public class Main {
                 case "6": // si es la opcion 6 se llamara al método para registrar un alquiler
                     resgistrarAlquiler(rentacar); 
                     break;
+                case "7":
+                    buscarAlquilerNif(pedirDato("Dame un nif"), rentacar);
+                    break;
+                    
                 default:
                     System.out.println("Adios!");;
             }
             // se sale del programa si se introduce un 7
-        } while (!opcion.equals("7"));
+        } while (!opcion.equals("8"));
 
     }
 
@@ -84,7 +89,8 @@ public class Main {
                         && !opcion.equals("4")
                         && !opcion.equals("5")
                         && !opcion.equals("6")
-                        && !opcion.equals("7")) {
+                        && !opcion.equals("7")
+                         && !opcion.equals("8")) {
                     throw new Exception();
                 }
             } catch (Exception e) {
@@ -97,9 +103,19 @@ public class Main {
                 && !opcion.equals("4")
                 && !opcion.equals("5")
                 && !opcion.equals("6")
-                && !opcion.equals("7"));
+                && !opcion.equals("7")
+                 && !opcion.equals("8"));
 
         return opcion;
+    }
+    
+    private static void buscarAlquilerNif(String nif, Empresa empresa){
+        
+        if (empresa.alquilerCliente(nif)==null){
+            System.out.println("No existe un alquiler con ese nif, introduce un nif valido");
+        } else  {
+            empresa.alquilerCliente(nif);
+        }
     }
 
     // método para pedir un dato

@@ -11,68 +11,26 @@ import java.util.List;
  *
  * @author eli
  */
-public class CatalogoAlquileres {
+public class CatalogoAlquileres extends Catalogo<Alquiler> {
     
-
-    private List<Alquiler> lista;
-
-    // constructor por defecto donde se le indica el tamaño
-    public CatalogoAlquileres(int tamanio) {
-        // lo ponemos en positivo por si acaso
-        tamanio = Math.abs(tamanio);
-        // ponemos el numero de alquileres igual al tamaño
-        // creamos la lista de alquileres del tamaño correspondiente
-        this.lista = new ArrayList<>();       
-    }
-
-
-    public String toString() {
-        String tmp = "";
-        for (Alquiler v : lista) {
-                tmp += v.toString() + "\n";
-        }
-        return tmp;
-    }
-
-
-
-    // método privado para buscar alquiler
-    private int buscar(Alquiler alquiler) {
-        if (alquiler!= null) {
-            for (int i = 0; i < lista.size(); i++) {
-                // si no es null y su id es igual devolverá la posicion
-                if ( lista.contains(alquiler) ){
-                    return i;
-                }
-            }
-        }
-        return -1;
+    public CatalogoAlquileres(int tam) {
+        super(tam);
     }
 
     // busca la posicion de un alquiler
     public Alquiler buscarAlquiler(int id) {
         Alquiler aux = new Alquiler();
         aux.setAlquilerID(id);
-        int posicion = buscar(aux);
+        int posicion = buscarPosicionElemento(aux);
        return (posicion >= 0) ? this.lista.get(posicion) : null;
     }
-
-    // borrará el alquiler poniendo en su posicion null (llamando al método privado de buscar)
-    public boolean borrarAlquiler(Alquiler alquiler) {
-        int pos = buscar(alquiler);
-        if (pos >= 0) {
-            this.lista.remove(pos);
-            return true;
-        };
-        return false;
+    
+    public CatalogoAlquileres buscarAlquiler(String clientenNif){
+        CatalogoAlquileres aux = new CatalogoAlquileres(10);
+        for (Alquiler alquiler : lista) {
+            System.out.println(alquiler.toString());
+        }
+        return aux;
     }
 
-    public int getNumeroVehiculo(){
-        return this.lista.size();
-    }
-
-    // método que añade un alquiler 
-    public void addAlquiler(Alquiler alquiler) {
-        lista.add(alquiler);
-    }
 }

@@ -11,6 +11,16 @@ import java.util.Objects;
  *
  * @author eli
  */
+/*
+Además, debes añadir la siguiente funcionalidad en la clase Empresa:
+
+    Devolver una lista con todos Alquileres de un cliente, usando su NIF.
+    Devolver una lista con todos Alquileres de un vehiculo, usando su bastidor.
+    Borrar un alquiler por id.
+    Borrar un cliente del catálogo, si no tiene alquileres grabados.
+    Borrar un vehículo del catálogo, si no tiene alquileres grabados.
+    Obtener la lista de vehículos que deben ser devueltos en una fecha dada.
+*/
 public class Empresa {
 
     // atributos empresa encapsulados;
@@ -23,8 +33,6 @@ public class Empresa {
     public Empresa(String cif, String nombre) {
         this.cif = cif;
         this.nombre = nombre;
-        // se crea un catálogo aleatorio de cada categoria
-        // alquileres estará vacio, cliente y vehiculo objetos aleatorios
         this.catAlquiler = new CatalogoAlquileres(5);
         this.catCliente = new CatalogoClientes(5);
         this.catVehiculo = new CatalogoVehiculos(5);
@@ -117,16 +125,16 @@ public class Empresa {
         } else if (!matricula.isBlank()) {
             aux.setMatricula(bastidor);
         }
-        catVehiculo.anadirVehiculo(aux);
+        catVehiculo.anadirElemento(aux);
     }
 
     // añadimos cliente a catálogo clientes, si los datos están en blanco se crearán de forma aleatoria
     public void addCliente(String nif, String nombre, String apellido) {
         ClienteEnum aux = new ClienteEnum();
         if (!nif.isBlank() && !nombre.isBlank() && !apellido.isBlank()) {
-            catCliente.addCliente(new ClienteEnum(nombre, nif, apellido));
+            catCliente.anadirElemento(new ClienteEnum(nombre, nif, apellido));
         } else {
-            catCliente.addCliente(aux);
+            catCliente.anadirElemento(aux);
         }
 
     }
@@ -155,7 +163,7 @@ public class Empresa {
         } else {
             Alquiler aux = new Alquiler(cliente, vehiculo, fechaInicio, duracionDias);
             // se llama al método addAlquiler de catalogo de alquiler para añadir el alquiler
-            catAlquiler.addAlquiler(aux);
+            catAlquiler.anadirElemento(aux);
             aux.getVehiculo().setDisponible(false);
             return true;
         }
@@ -170,7 +178,21 @@ public class Empresa {
         } else {
             return false;
         }
-
     }
+    
+    // Devolver una lista con todos Alquileres de un cliente, usando su NIF.
+    public CatalogoAlquileres alquilerCliente(String nif){
+        if (this.catAlquiler.lista.isEmpty()){
+        return null;
+        }
+    return this.catAlquiler.buscarAlquiler(nif);
+    }
+    
+//    Devolver una lista con todos Alquileres de un vehiculo, usando su bastidor.
+//    Borrar un alquiler por id.
+//    Borrar un cliente del catálogo, si no tiene alquileres grabados.
+//    Borrar un vehículo del catálogo, si no tiene alquileres grabados.
+//    Obtener la lista de vehículos que deben ser devueltos en una fecha dada.
+    
 
 }

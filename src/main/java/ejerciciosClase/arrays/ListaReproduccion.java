@@ -90,13 +90,11 @@ public class ListaReproduccion {
     //usando el método Collections.sort(lista, criterioComparator)
     public void ordenarCancionTitulo(){
        // Collections.sort(lstEmployees, (x, y) -> x.getName().compareToIgnoreCase(y.getName()));
-       Collections.sort(lista, (x,y) -> x.getAutor().compareToIgnoreCase(y.getAutor()));
-        lista.forEach(System.out::println);
+       Collections.sort(lista, (x,y) -> x.getNombre().compareToIgnoreCase(y.getNombre()));
     }
     
     public void ordenarCancionAutor(){
         Collections.sort(lista, (cancionUno, cancionDos)-> cancionUno.getAutor().compareToIgnoreCase(cancionDos.getAutor()));
-        lista.forEach(System.out::println);
     }
     
 }
