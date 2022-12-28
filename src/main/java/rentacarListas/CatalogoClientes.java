@@ -8,9 +8,10 @@ package rentacarListas;
  *
  * @author eli
  */
-// clase catalogoClientes
+// catálogo clientes es una clase que hereda de catálogo
 public class CatalogoClientes extends Catalogo<ClienteEnum>{
 
+    // contructor por defecto que crea el catalogo del tamaño que le hemos pasado y lo rellena con clientes aleatorios
        public CatalogoClientes(int tam) {
         super(tam);
         for (int i = 0; i < tam; i++) {
@@ -29,5 +30,5 @@ public class CatalogoClientes extends Catalogo<ClienteEnum>{
         return resultado;
     }
     
-
+    
 }

@@ -31,6 +31,8 @@ public class VehiculoEnum {
         this.modelo = Modelo.getAleatorio();
         this.disponible = true;
     }
+    
+    
 
     @Override
     public String toString() {

@@ -16,7 +16,11 @@ public class Alquiler {
     private ClienteEnum cliente;
     private VehiculoEnum vehiculo;
     private LocalDate fechaInicio;
-    private int duracionDias;
+    private int duracionDiasPrevista;
+    private long duracionDiasTotal;
+    // este es un atributo añadido para comprobar si un alquiler está en activo o no
+    // es decir si un coche no ha sido devuelto el alquiler sigue activo y no tiene fechaFin si ha sido devuelto el alquiler esta inactivo y si tiene fechaFin
+    private LocalDate fechaFin;
     
     private static int contador = 0;
 
@@ -26,24 +30,38 @@ public class Alquiler {
         this.cliente = cliente;
         this.vehiculo = vehiculo;
         this.fechaInicio = fechaInicio;
-        this.duracionDias = duracionDias;
+        this.duracionDiasPrevista = duracionDias;
     }
 
     public Alquiler() {
     }
 
+    public long getDuracionDiasTotal() {
+        return duracionDiasTotal;
+    }
+
+    public void setDuracionDiasTotal(long duracionDiasTotal) {
+        this.duracionDiasTotal = duracionDiasTotal;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
     public void setAlquilerID(int alquilerID) {
         this.alquilerID = alquilerID;
     }
-    
-    
 
-    public int getDuracionDias() {
-        return duracionDias;
+    public int getDuracionDiasPrevista() {
+        return duracionDiasPrevista;
     }
 
-    public void setDuracionDias(int duracionDias) {
-        this.duracionDias = duracionDias;
+    public void setDuracionDiasPrevista(int duracionDiasPrevista) {
+        this.duracionDiasPrevista = duracionDiasPrevista;
     }
 
     public ClienteEnum getCliente() {
@@ -73,6 +91,8 @@ public class Alquiler {
     public int getAlquilerID() {
         return alquilerID;
     }
+    
+    
 
     @Override
     public String toString() {
@@ -81,9 +101,11 @@ public class Alquiler {
                   ID Alquiler -> %d
                         NIF DEL CLIENTE -> %s
                         BASTIDOR DEL VEHICULO -> %s
-                        FECHA -> %s
-                        DURACION -> %d dias
-                  """.formatted(alquilerID, cliente.getNif(), vehiculo.getBastidor(), fechaInicio, duracionDias));
+                        FECHA DE INICIO -> %s
+                        FECHA DE FIN -> %s
+                        DURACION PREVISTA -> %d dias
+                  DURACION TOTAL -> %d dias
+                  """.formatted(alquilerID, cliente.getNif(), vehiculo.getBastidor(), fechaInicio, fechaFin, duracionDiasPrevista, duracionDiasTotal));
         return sb.toString();
     }
 
@@ -108,7 +130,6 @@ public class Alquiler {
         final Alquiler other = (Alquiler) obj;
         return this.alquilerID == other.alquilerID;
     }
-    
     
  
     

@@ -5,6 +5,7 @@
 package rentacarListas;
 
 import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.Objects;
 
 /**
@@ -20,7 +21,7 @@ Además, debes añadir la siguiente funcionalidad en la clase Empresa:
     Borrar un cliente del catálogo, si no tiene alquileres grabados.
     Borrar un vehículo del catálogo, si no tiene alquileres grabados.
     Obtener la lista de vehículos que deben ser devueltos en una fecha dada.
-*/
+ */
 public class Empresa {
 
     // atributos empresa encapsulados;
@@ -117,24 +118,39 @@ public class Empresa {
     }
 
     // añadimos un vehiculo al catálogo de vehiculos, modificará el bastidor y la mátricula si el usuario pone datos
-    public void addVehiculo(String bastidor, String matricula) {
-
+    public boolean addVehiculo(String bastidor, String matricula) {
         VehiculoEnum aux = new VehiculoEnum();
-        if (!bastidor.isBlank()) {
-            aux.setBastidor(bastidor);
-        } else if (!matricula.isBlank()) {
-            aux.setMatricula(bastidor);
+        aux.setBastidor(bastidor);
+        aux.setMatricula(matricula);
+        if (catVehiculo.buscarVehiculo(bastidor) == null) {
+            catVehiculo.anadirElemento(aux);
+            return true;
+        } else {
+            return false;
         }
-        catVehiculo.anadirElemento(aux);
+
+    }
+
+    //mostramos alquileres activos (es decir si que no tengan fechaFin, ya que eso significa que el coche no ha sido devuelto)
+    public CatalogoAlquileres mostrarAlquileresActivos() {
+        CatalogoAlquileres aux = catAlquiler.buscarAlquileresActivos();
+        if (aux.lista.isEmpty()) {
+            return null;
+        } else {
+            return aux;
+        }
     }
 
     // añadimos cliente a catálogo clientes, si los datos están en blanco se crearán de forma aleatoria
-    public void addCliente(String nif, String nombre, String apellido) {
-        ClienteEnum aux = new ClienteEnum();
-        if (!nif.isBlank() && !nombre.isBlank() && !apellido.isBlank()) {
-            catCliente.anadirElemento(new ClienteEnum(nombre, nif, apellido));
-        } else {
+    // si ya hay un cliente registrado no se registrará
+    public boolean addCliente(String nif, String nombre, String apellido) {
+        ClienteEnum aux = new ClienteEnum(nombre, nif, apellido);
+        ClienteEnum cliente = buscarCliente(nif);
+        if ((cliente == null)) {
             catCliente.anadirElemento(aux);
+            return true;
+        } else {
+            return false;
         }
 
     }
@@ -170,29 +186,82 @@ public class Empresa {
     }
 
     // método que cambia el estado del vehiculo que se ha alquilado a true porque ya se ha devuelto
-    public boolean recibirVehiculo(int id) {
+    // y pone fecha de fin
+    public boolean recibirVehiculo(int id, LocalDate fecha) {
         Alquiler aux = buscarAlquiler(id);
         if (aux != null) {
             aux.getVehiculo().setDisponible(true);
+            aux.setDuracionDiasTotal(DAYS.between(aux.getFechaInicio(), fecha));
+            aux.setFechaFin(fecha);
             return true;
         } else {
             return false;
         }
     }
-    
+
     // Devolver una lista con todos Alquileres de un cliente, usando su NIF.
-    public CatalogoAlquileres alquilerCliente(String nif){
-        if (this.catAlquiler.lista.isEmpty()){
-        return null;
+    public CatalogoAlquileres alquilerCliente(String nif) {
+        if (this.catAlquiler.lista.isEmpty()) {
+            return null;
         }
-    return this.catAlquiler.buscarAlquiler(nif);
+        return this.catAlquiler.buscarAlquiler(nif);
+    }
+
+    //  Devolver una lista con todos Alquileres de un vehiculo, usando su bastidor.
+    public CatalogoAlquileres alquilerBastidor(String bastidor) {
+        if (this.catAlquiler.lista.isEmpty()) {
+            return null;
+        }
+        return this.catAlquiler.buscarAlquileresBastidor(bastidor);
+    }
+
+    //   Borrar un alquiler por id.
+    public boolean borrarAlquiler(int id) {
+        return this.catAlquiler.borrarAlquiler(id);
     }
     
-//    Devolver una lista con todos Alquileres de un vehiculo, usando su bastidor.
-//    Borrar un alquiler por id.
-//    Borrar un cliente del catálogo, si no tiene alquileres grabados.
-//    Borrar un vehículo del catálogo, si no tiene alquileres grabados.
-//    Obtener la lista de vehículos que deben ser devueltos en una fecha dada.
-    
+    //   Borrar un cliente del catálogo, si no tiene alquileres grabados con el nif
+    public boolean borrarClienteSinAlquiler(String nif) {
+        if(catAlquiler.buscarAlquiler(nif)==null){
+        return catCliente.borrarElemento(buscarCliente(nif));
+        }
+        return false;
+    }
 
+    //   Borrar TODOS LOS clienteS del catálogo, si no tiene alquileres grabados.
+    public CatalogoClientes borrarClientesSinAlquiler() {
+        // creamos un catalogo con todos los clientes a eliminar
+        CatalogoClientes aux = new CatalogoClientes(0);
+        // recorremos el catalogo de clientes y añadimos a aux el cliente que no esté en un alquiler
+        for (int i = 0; i < catCliente.lista.size(); i++) {
+            if (catAlquiler.buscarAlquiler(catCliente.lista.get(i).getNif()) == null) {
+                aux.anadirElemento(catCliente.lista.get(i));
+            }
+        }
+        // eliminamos todos los elementos de catalogo clientes que esten en aux
+        catCliente.lista.removeAll(aux.lista);
+        // devolvemos la lista de clientes eliminada, no tendríamos porque pero me ha parecido mejor mostrar la lista que no mandar un true o false o no mandar nada
+        return aux;
+    }
+
+    //    Borrar un vehículo del catálogo, si no tiene alquileres grabados.
+    public boolean borrarVehiculoSinAlquiler(String bastidor){
+        if (catAlquiler.buscarAlquileresBastidor(bastidor)==null){
+        return catVehiculo.borrarElemento(catVehiculo.buscarVehiculo(bastidor));
+        }
+        return false;
+    }
+    
+//    Obtener la lista de vehículos que deben ser devueltos en una fecha dada.
+    public CatalogoVehiculos vehiculosParaDevolver(LocalDate fechaDevolucion){
+    CatalogoVehiculos vehiculosParaDevolver = new CatalogoVehiculos(0);
+        for (int i = 0; i < catAlquiler.lista.size(); i++) {
+            // si la fecha de inicio del alquiler más los dias previstos es igual a la fecha que se pasa como parámetro me lo añades al catalogo vehiculosParaDevolver
+            if (catAlquiler.lista.get(i).getFechaInicio().plusDays(catAlquiler.lista.get(i).getDuracionDiasPrevista()).isEqual(fechaDevolucion)){
+            vehiculosParaDevolver.anadirElemento(catAlquiler.lista.get(i).getVehiculo());
+            } 
+        }
+        // si la lista está vacia me devuelves un null, sino me devuelves el catalogo
+    return (vehiculosParaDevolver.lista.isEmpty()) ? null : vehiculosParaDevolver;
+    }
 }
