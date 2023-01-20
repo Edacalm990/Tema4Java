@@ -13,6 +13,7 @@ import java.time.LocalDate;
 public class Main {
 
     public static void main(String[] args) {
+        // creamos una empresa
         Empresa rentacar = new Empresa("1234", "Rentacar");
 
         // mostrar vehiculos
@@ -21,7 +22,7 @@ public class Main {
         // mostrar clientes
         System.out.println(rentacar.getCatCliente());
 
-        // mostrar alquileres, si no hay me muestra una frase para saber que ha funcionado correctamente
+        // mostrar alquileres, si no hay, me muestra una frase para saber que ha funcionado correctamente
         if (rentacar.getCatAlquiler().getNumeroElementos() == 0) {
             System.out.println("""
                                            NO HAY ALQUILERES ACTUALMENTE
@@ -63,7 +64,7 @@ public class Main {
         rentacar.addVehiculo("0004", "abc444");
         rentacar.addVehiculo("0005", "abc444");
 
-        // registrar alquiler con el cliente y vehiculo que cabamaos de añadir
+        // registrar alquiler con el cliente y vehiculo que acabamos de añadir
         System.out.println("""
                            Se ha registrado el alquiler correctamente con el bastidor incorrecto? %b
                            Se ha registrado el alquiler correctamente con el nif incorrecto? %b
@@ -164,7 +165,7 @@ public class Main {
         
         // Obtener la lista de vehículos que deben ser devueltos en una fecha dada.
         System.out.println("""
-                           Probamos el método vehiculos que debmos delver dada una fecha
+                           Probamos el método vehiculosParaDevolver  dada una fecha
                            Con una fecha donde no haya que devolver nada, daría un null
                            01-01-2025 (debe salir un null)
                            %s

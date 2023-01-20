@@ -42,76 +42,56 @@ public class Ejercicio5E_A {
     public static void main(String[] args) {
         final int ORIGEN_ALEATORIO = 0;
         final int FIN_ALEATORIO = 20;
-        final int SIZE_MIN = 3;
-        final int SIZE_MAX = 6;
+        final int MIN_MATRIZ = 3;
+        final int MAX_MATRIZ = 6;
 
         int opcion = pedirOpcion();
-        int[][] matriz = (opcion == 0)
-                ? matrizParametrizada(SIZE_MIN, SIZE_MAX)
-                : matrizAleatorio(SIZE_MIN, SIZE_MAX, ORIGEN_ALEATORIO, FIN_ALEATORIO);
+        if (opcion != -1) {
+            int[][] matriz = (opcion == 0)
+                    ? matrizParametrizada(MIN_MATRIZ, MAX_MATRIZ)
+                    : matrizAleatorio(MIN_MATRIZ, MAX_MATRIZ, ORIGEN_ALEATORIO, FIN_ALEATORIO);
 
-        imprimirMatriz(matriz);
-
-        for (int fila = 0; fila < matriz.length; fila++) {
-            int[] mayorFila = mayorFila(matriz[fila]);
-            System.out.println("""
-                               mayorFila %s
-                               """.formatted(mayorFila[1]));
-            boolean resultado = esMenorColumna(mayorFila, matriz);
-            System.out.println(resultado);
-
+            Coordenada coordenada = new Coordenada(matriz);
+            JOptionPane.showMessageDialog(null, imprimirMatriz(matriz) + coordenada.toString(), "Matriz", 1);
         }
-
-    }
-
-    public static boolean esMenorColumna(int[] mayorFila, int[][] matriz) {
-        for (int i = 0; i < matriz.length; i++) {
-            if (matriz[i][mayorFila[0]]>=mayorFila[1] && i!=mayorFila[0]) {
-            return false;
-            }
-                
-        }
-        return true;
-    }
-
-    public static int[] mayorFila(int[] fila) {
-        int[] mayor = new int[2];
-        for (int i = 0; i < fila.length; i++) {
-            if (fila[i] >= mayor[1]) {
-                mayor[0] = i;
-                mayor[1] = fila[i];
-            }
-        }
-        return mayor;
     }
 
     public static int pedirOpcion() {
         int numero = -1;
+        String opcion = "";
         do {
             try {
-                numero = Integer.parseInt(JOptionPane.showInputDialog("""
+                opcion = JOptionPane.showInputDialog("""
                                                                       ELIJE UNA OPCIÓN
                                                                       0 - Crear matriz Parametrizada
                                                                       1 - Cear matriz Aleatoria
-                                                                      """));
-                if (numero != 0 && numero != 1) {
+                                                                      """);
+                if (opcion != null) {
+                    numero = Integer.parseInt(opcion);
+                    if  (numero != 0 && numero != 1) {
                     throw new Exception();
+                    }
+                } else {
+                    return numero;
                 }
+
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Debes elegir una opción del menú, 0 o 1");
             }
-        } while (numero != 0 && numero != 1);
+        } while (numero != 0 && numero != 1 && opcion != null);
         return numero;
     }
 
-    public static void imprimirMatriz(int[][] matriz) {
+    public static String imprimirMatriz(int[][] matriz) {
+        String tmp = "";
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
-                System.out.print(matriz[i][j] + " ");
+                tmp += "|" + matriz[i][j] + "|" + " ";
 
             }
-            System.out.println("");
+            tmp += "\n";
         }
+        return tmp;
     }
 
     public static int[][] crearMatriz(String mensaje, int min, int max) {
@@ -155,7 +135,7 @@ public class Ejercicio5E_A {
         do {
             try {
                 num = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
-                if (num < min || num >= max) {
+                if (num < min || num > max) {
                     throw new Exception();
                 }
                 return num;

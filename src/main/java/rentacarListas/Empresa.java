@@ -118,6 +118,7 @@ public class Empresa {
     }
 
     // añadimos un vehiculo al catálogo de vehiculos, modificará el bastidor y la mátricula si el usuario pone datos
+    // si ya hay un vehiculo registrado con ese bastidor no se registrará
     public boolean addVehiculo(String bastidor, String matricula) {
         VehiculoEnum aux = new VehiculoEnum();
         aux.setBastidor(bastidor);
@@ -174,12 +175,15 @@ public class Empresa {
     public boolean registrarAlquiler(LocalDate fechaInicio, String bastidor, String nif, int duracionDias) {
         VehiculoEnum vehiculo = buscarVehiculo(bastidor);
         ClienteEnum cliente = buscarCliente(nif);
+        // vehiculo no existe O cliente no existe O la fecha es anterior a la fecha actual O la duración en dias en de de 0(si solo han sido unas horas) o más O el vehiculo está disponible 
         if (vehiculo == null || cliente == null || fechaInicio.isBefore(LocalDate.now()) || duracionDias <= 0 || !vehiculo.isDisponible()) {
+            // devolverá false es decir no se ha registrado
             return false;
         } else {
             Alquiler aux = new Alquiler(cliente, vehiculo, fechaInicio, duracionDias);
             // se llama al método addAlquiler de catalogo de alquiler para añadir el alquiler
             catAlquiler.anadirElemento(aux);
+            // se pone el vehiculo del alquiler a no disponible
             aux.getVehiculo().setDisponible(false);
             return true;
         }
@@ -190,8 +194,11 @@ public class Empresa {
     public boolean recibirVehiculo(int id, LocalDate fecha) {
         Alquiler aux = buscarAlquiler(id);
         if (aux != null) {
+            // pone el vehiculo a disponible
             aux.getVehiculo().setDisponible(true);
+            // pone la duracion total calculando los días entre la fecha de inicio y la fechga de devolucion 
             aux.setDuracionDiasTotal(DAYS.between(aux.getFechaInicio(), fecha));
+            // pone la fecha de fin
             aux.setFechaFin(fecha);
             return true;
         } else {

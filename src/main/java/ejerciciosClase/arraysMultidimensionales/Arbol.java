@@ -10,47 +10,33 @@ import javax.swing.JOptionPane;
  *
  * @author eli
  */
-/*
-++*++
-+***+
-*****
-boolean [][] arbol = new bolean [altura][altura+2]
-contador=0;
-for (int i = arbol.length; i >0 ; i--) {
-            for (int j = 0; i < arbol[i].length; i++) {
-            if(
-            arbol[i][j];
-            }
-        }
-        
-        3+2/2=2.5 redondeando para arriba 3
-*/
 public class Arbol {
     public static void main(String[] args) {
         
         final int TRONCO=2;
-
-        int copa = pedirNumero();
+        final int MIN_ALTURA=2;
+        final int MAX_ALTURA=10;
+        int copa = pedirNumero("Que altura tiene la copa del arbol?", MIN_ALTURA, MAX_ALTURA);
         imprimirArbol(crearArbol(copa, TRONCO));
         
-        int tronco2=pedirNumero();
-        int copa2=pedirNumero();
+        int tronco2=pedirNumero("Que altura tiene el tronco del arbol?", MIN_ALTURA, MAX_ALTURA);
+        int copa2=pedirNumero("Que altura tiene la copa del arbol?", MIN_ALTURA, MAX_ALTURA);
         imprimirArbol(crearArbol(copa2, tronco2));
         
     }
-    public static int pedirNumero (){
+    public static int pedirNumero (String mensaje , int minAltura, int maxAltura){
         int altura=0;
         do {            
             try {
-               altura = Integer.parseInt(JOptionPane.showInputDialog("Que altura tiene la copa del arbol?"));
-               if (altura<2||altura>10) {
+               altura = Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+               if (altura<minAltura||altura>maxAltura) {
                    throw new Exception();
                }
                return altura;
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Debe ser un número entero y positivo entre 2 y 10");
             }
-        } while (altura<2||altura>10);
+        } while (altura<minAltura||altura>maxAltura);
     return altura;
     }
     
