@@ -16,8 +16,13 @@ public class Coordenada {
         this.cordenada = obtenerCoordenada(matriz);
     }
 
-    public int[] getCordenada() {
-        return cordenada;
+    
+    public int getFila () {
+        return cordenada[0];
+    }
+    
+    public int getColumna () {
+        return cordenada[1];
     }
 
     public void setCordenada(int[][] matriz) {
