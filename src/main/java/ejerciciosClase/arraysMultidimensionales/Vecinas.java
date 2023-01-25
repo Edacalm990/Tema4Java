@@ -27,14 +27,7 @@ public class Vecinas {
     
     public static void obtenerVecinas(int [] coordenada, int [][] matriz){
         ArrayList vecinas = new ArrayList();
-        if (coordenada[0]<=matriz.length && coordenada[1] <= matriz[0].length){
-            String coordenadaA= (coordenada[0]<=0 && coordenada[1]<=0) 
-                    ? "no hay"
-                    : String.valueOf(matriz[coordenada[0]-1][coordenada[1]-1]);
-            System.out.println(coordenadaA);
-            
-            
-        }
+        
     }
     
     // imprimir matriz

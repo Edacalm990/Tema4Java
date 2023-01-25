@@ -39,6 +39,7 @@ public class Diagonal {
         }
     }
     
+    
     public static void recorrerDiagonalSecundariaAbajoArriba(int [][] matriz){
          int contador=0;
         for (int fila = matriz.length-1; fila >= 0; fila--) {
@@ -72,6 +73,19 @@ public class Diagonal {
         }
     }
     
+    public static void recorrerDiagonalPrincipalComoEnClase(int[][] matriz){
+        for (int i = 0; i < matriz.length; i++) {
+            System.out.println(matriz[i][i]);
+        }
+    }
+    
+    public static void recorrerDiagonalSecundariaComoEnClaseArribaAbajo(int [][] matriz){
+        for (int i = 0; i < matriz.length; i++) {
+            System.out.println(matriz[i][matriz.length-1-i]);
+            
+        }
+    }
+    
         // imprimir matriz
     public static String imprimirMatriz(int[][] matriz) {
         String tmp = "";
@@ -84,6 +98,7 @@ public class Diagonal {
         }
         return tmp;
     }
+    
     
     public static int [][] rellenarMatriz (int [][] matriz){
         for (int i = 0; i < matriz.length; i++) {
