@@ -123,14 +123,14 @@ public class Ejercicio5E_A {
     }
 
     public static int pedirNumero(String palabra, int min, int max) {
-        String mensaje = (palabra.equalsIgnoreCase("pedirNumero")
+        String mensaje = (palabra.equalsIgnoreCase("")
                 ? """
                                            Dame un numero entre %d y %d
                                            """.formatted(min, max)
                 : """
-                                              Que tamaño tendrá la matriz ? 
+                                              %s
                                               Dame un número entre %d y %d
-                                              """.formatted(min, max));
+                                              """.formatted(palabra, min, max));
         int num = 0;
         do {
             try {
